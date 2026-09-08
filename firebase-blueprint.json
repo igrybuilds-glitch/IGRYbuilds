@@ -1,0 +1,129 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile information authenticated via Firebase Auth",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID matching document ID",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "email": {
+          "type": "string",
+          "description": "User email address",
+          "maxLength": 256
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User display name",
+          "maxLength": 128
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "User avatar URL",
+          "maxLength": 512
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Server timestamp of user creation",
+          "maxLength": 64
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Server timestamp of last profile update",
+          "maxLength": 64
+        }
+      },
+      "required": ["userId", "email", "createdAt", "updatedAt"]
+    },
+    "ProjectBrief": {
+      "title": "ProjectBrief",
+      "description": "Project brief and system architecture inquiry submitted by user",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique brief identifier",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID of the owner who submitted the brief",
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "maxLength": 128
+        },
+        "clientName": {
+          "type": "string",
+          "description": "Full name of the company or founder",
+          "maxLength": 128
+        },
+        "email": {
+          "type": "string",
+          "description": "Contact email address",
+          "maxLength": 256
+        },
+        "phone": {
+          "type": "string",
+          "description": "WhatsApp or phone number",
+          "maxLength": 64
+        },
+        "companyName": {
+          "type": "string",
+          "description": "Company or business name",
+          "maxLength": 128
+        },
+        "serviceType": {
+          "type": "string",
+          "description": "Selected system architecture service",
+          "maxLength": 64
+        },
+        "budgetRange": {
+          "type": "string",
+          "description": "Budget scope tier",
+          "maxLength": 64
+        },
+        "timeline": {
+          "type": "string",
+          "description": "Target delivery speed",
+          "maxLength": 64
+        },
+        "description": {
+          "type": "string",
+          "description": "System specifications and operational friction details",
+          "maxLength": 2000
+        },
+        "status": {
+          "type": "string",
+          "description": "Brief review status in pipeline",
+          "enum": ["submitted", "reviewing", "architecture_ready", "scheduled"],
+          "maxLength": 32
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Server timestamp of submission",
+          "maxLength": 64
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Server timestamp of last update",
+          "maxLength": 64
+        }
+      },
+      "required": ["id", "userId", "clientName", "email", "serviceType", "description", "status", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profile records containing account metadata"
+    },
+    "/briefs/{briefId}": {
+      "schema": { "$ref": "#/entities/ProjectBrief" },
+      "description": "System architecture project briefs submitted by users"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "IGRYbuilds — Digital Systems & AI Agency",
+  "description": "Production-grade animated agency website for IGRYbuilds, delivering high-performance custom websites, AI automation, conversational agents, and conversion-focused systems.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
