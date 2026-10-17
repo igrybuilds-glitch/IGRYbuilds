@@ -9,6 +9,22 @@
   var BATCH = 24;
   var DATA_URL = "data/projects.json";
 
+  /* Intent-menu deep links (work.html?cat=websites|automation|chatbots|whatsapp|seo).
+     Service -> business categories that most often need it. Curated UX preset,
+     not a claim about the projects themselves. "websites" = every concept. */
+  var SERVICE_CATS = {
+    automation: ["Real Estate", "Clinics", "Restaurants", "Hotels", "Travel Agents",
+      "Event Planners", "Coaches", "Tutors", "Gyms", "Salons", "Garages", "Pet Services"],
+    chatbots: ["E-commerce", "Restaurants", "Hotels", "Clinics", "Travel Agents",
+      "Real Estate", "Cafes", "Spas"],
+    whatsapp: ["Restaurants", "Salons", "Spas", "Clinics", "Hotels", "Real Estate",
+      "Event Planners", "Garages", "Boutiques", "Jewellers"],
+    seo: ["Restaurants", "Cafes", "Clinics", "Salons", "Hotels", "Architects",
+      "Interior Designers", "Lawyers", "Bakeries", "Photographers"]
+  };
+  var SERVICE_LABEL = { automation: "Automation", chatbots: "AI Chatbots",
+    whatsapp: "WhatsApp Systems", seo: "SEO" };
+
   /* 24 category archetypes — distinct abstract mini-layouts, no fake copy. */
   var ARCH = [
     /* 0 hero-block */      '<div class="nv"></div><div class="hr"><div class="ln mid"></div><div class="ln short"></div><div class="btn"></div></div>',
@@ -88,8 +104,8 @@
     });
   }
 
-  function countLabel(shown, total, category, query) {
-    var scope = category === "all" ? "all categories" : category;
+  function countLabel(shown, total, category, query, presetLabel) {
+    var scope = presetLabel || (category === "all" ? "all categories" : category);
     if (query && query.trim()) scope += ' matching \u201C' + query.trim() + "\u201D";
     return "Showing <b>" + shown + "</b> of <b>" + total + "</b> \u2014 " + esc(scope);
   }
@@ -109,7 +125,8 @@
     var projects = [];
     var byId = {};
     var categories = [];
-    var state = { category: "all", query: "", shown: 0, filtered: [] };
+    var state = { category: "all", query: "", shown: 0, filtered: [],
+      multiCat: null, presetLabel: "" };
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var observer = null;
 
@@ -122,7 +139,7 @@
     }
 
     function paintCount() {
-      countEl.innerHTML = countLabel(state.shown, state.filtered.length, state.category, state.query);
+      countEl.innerHTML = countLabel(state.shown, state.filtered.length, state.category, state.query, state.presetLabel);
     }
 
     function renderBatch() {
@@ -147,7 +164,11 @@
     }
 
     function applyFilters(resetScroll) {
-      state.filtered = filterProjects(projects, state.category, state.query);
+      var list = projects;
+      if (state.multiCat && state.multiCat.length) {
+        list = projects.filter(function (p) { return state.multiCat.indexOf(p.category) !== -1; });
+      }
+      state.filtered = filterProjects(list, state.category, state.query);
       state.shown = 0;
       grid.innerHTML = "";
       emptyBox.hidden = state.filtered.length > 0;
@@ -176,6 +197,7 @@
         chipsBox.querySelectorAll(".chip").forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
         btn.setAttribute("aria-pressed", "true");
         state.category = btn.getAttribute("data-cat");
+        state.multiCat = null; state.presetLabel = "";
         applyFilters(false);
       });
     }
@@ -195,7 +217,7 @@
     });
     loadBtn.addEventListener("click", renderBatch);
     resetBtn.addEventListener("click", function () {
-      state.category = "all"; state.query = "";
+      state.category = "all"; state.query = ""; state.multiCat = null; state.presetLabel = "";
       search.value = ""; clearBtn.hidden = true;
       chipsBox.querySelectorAll(".chip").forEach(function (b) {
         b.setAttribute("aria-pressed", b.getAttribute("data-cat") === "all" ? "true" : "false");
@@ -265,6 +287,15 @@
         projects.forEach(function (p) { if (categories.indexOf(p.category) === -1) categories.push(p.category); });
         categories.sort();
         buildChips();
+        /* intent-menu deep link: work.html?cat=<service> pre-filters the grid */
+        try {
+          var m = /[?&]cat=([a-z]+)/i.exec(window.location.search || "");
+          if (m && SERVICE_CATS[m[1].toLowerCase()]) {
+            var svc = m[1].toLowerCase();
+            state.multiCat = SERVICE_CATS[svc];
+            state.presetLabel = SERVICE_LABEL[svc] + " concepts";
+          }
+        } catch (e) { /* stay on the full grid */ }
         applyFilters(false);
       })
       .catch(function (err) {
