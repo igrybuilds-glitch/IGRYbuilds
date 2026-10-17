@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IGRYbuilds — Websites that win customers. Automation that never sleeps.</title>
+  <meta name="description" content="IGRYbuilds is a founder-led agency in Rajasthan, India. Premium websites and smart automation that help local businesses win more customers. Replies within 24 hours.">
+  <meta property="og:title" content="IGRYbuilds — Websites that win customers. Automation that never sleeps.">
+  <meta property="og:description" content="Premium websites + smart automation for local businesses. Founder-led, built by hand in Rajasthan, India.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#050508">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/hero.css">
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.183.2/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.183.2/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- BOOT LOADER: markup only; boot.js removes `hidden` and runs the counter.
+       Without JS this overlay never appears and the page is fully visible. -->
+  <div class="boot" id="boot" hidden role="status" aria-label="Loading IGRYbuilds">
+    <div class="boot-inner">
+      <p class="boot-wordmark">IGRY<span>builds</span></p>
+      <p class="boot-line"><span class="boot-pct" data-boot-pct>000</span><span class="boot-pct-sign">%</span></p>
+      <p class="boot-sub">warming up the engine…</p>
+    </div>
+  </div>
+  <script src="assets/js/boot.js"></script>
+
+  <!-- SHARED NAV (identical on every page) -->
+  <header class="site-nav" id="siteNav">
+    <a class="wordmark" href="index.html" aria-label="IGRYbuilds — home">IGRY<span>builds</span></a>
+    <nav class="nav-pills" aria-label="Primary">
+      <a class="pill" href="work.html">Work</a>
+      <a class="pill pill-hot" href="contact.html">Contact</a>
+    </nav>
+    <button class="nav-burger" id="navBurger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <nav aria-label="Mobile">
+      <a href="work.html">Work</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="mm-hot">Contact</a>
+    </nav>
+    <p class="mm-label">What are you looking for?</p>
+    <nav aria-label="Mobile services">
+      <a href="work.html?cat=websites">Websites</a>
+      <a href="work.html?cat=automation">Automation</a>
+      <a href="work.html?cat=chatbots">AI Chatbots</a>
+      <a href="work.html?cat=whatsapp">WhatsApp</a>
+      <a href="work.html?cat=seo">SEO</a>
+    </nav>
+  </div>
+
+  <main id="main">
+
+    <!-- ============ 1. HERO ============ -->
+    <section class="hero" id="top" aria-label="Introduction">
+      <!-- hero.js (Builder HERO) wires Three.js into #hero-canvas.
+           .hero-bg carries a CSS-gradient fallback for no-WebGL / no-JS. -->
+      <div class="hero-bg" aria-hidden="true">
+        <canvas id="hero-canvas"></canvas>
+      </div>
+
+      <div class="hero-inner">
+        <p class="eyebrow" data-reveal>Founder-led agency · Rajasthan, India</p>
+        <h1 class="hero-h1" data-reveal>
+          <span class="glow-a">Websites that win customers.</span><br>
+          <span class="glow-b">Automation that never sleeps.</span>
+        </h1>
+        <p class="hero-sub" data-reveal>IGRYbuilds builds premium websites and smart automation for local
+          businesses — so you get more enquiries while you focus on your work.</p>
+
+        <div class="hero-ctas" data-reveal>
+          <a class="btn btn-hot" href="contact.html">Start a project <span aria-hidden="true">→</span></a>
+          <a class="btn btn-ghost" href="pricing.html">Estimate your cost</a>
+        </div>
+        <p class="hero-proof" data-reveal>Replies within 24 hours · 100% custom-built, no templates</p>
+
+        <div class="intent" data-reveal>
+          <p class="intent-prompt"><span class="intent-cursor" aria-hidden="true">&gt;</span> WHAT ARE YOU LOOKING FOR?</p>
+          <ul class="intent-list">
+            <li><a href="work.html?cat=websites"><span class="k">01</span>Websites</a></li>
+            <li><a href="work.html?cat=automation"><span class="k">02</span>Automation</a></li>
+            <li><a href="work.html?cat=chatbots"><span class="k">03</span>AI&nbsp;Chatbots</a></li>
+            <li><a href="work.html?cat=whatsapp"><span class="k">04</span>WhatsApp</a></li>
+            <li><a href="work.html?cat=seo"><span class="k">05</span>SEO</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <a class="hero-scroll" href="#services" data-scroll aria-label="Scroll to services">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ============ 2. SERVICES ============ -->
+    <section class="section services" id="services" aria-labelledby="services-h">
+      <div class="wrap">
+        <p class="eyebrow" data-reveal>What we do</p>
+        <h2 id="services-h" data-reveal>One studio. Every growth engine<br>a local business needs.</h2>
+
+        <div class="svc-grid">
+          <article class="svc" data-reveal>
+            <p class="svc-no">01</p>
+            <h3>Premium Websites</h3>
+            <p class="svc-line">A site that sells while you sleep.</p>
+            <p class="svc-tag">Design + build, from scratch</p>
+            <a class="svc-link" href="contact.html">Talk to us about this <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="svc" data-reveal>
+            <p class="svc-no">02</p>
+            <h3>Automation</h3>
+            <p class="svc-line">Busywork, deleted.</p>
+            <p class="svc-tag">Workflows that run themselves</p>
+            <a class="svc-link" href="contact.html">Talk to us about this <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="svc" data-reveal>
+            <p class="svc-no">03</p>
+            <h3>AI Chatbots</h3>
+            <p class="svc-line">Every question answered, instantly.</p>
+            <p class="svc-tag">Trained on your business, 24/7</p>
+            <a class="svc-link" href="contact.html">Talk to us about this <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="svc" data-reveal>
+            <p class="svc-no">04</p>
+            <h3>WhatsApp Systems</h3>
+            <p class="svc-line">Every enquiry answered in seconds.</p>
+            <p class="svc-tag">Flows, follow-ups, bookings</p>
+            <a class="svc-link" href="contact.html">Talk to us about this <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="svc" data-reveal>
+            <p class="svc-no">05</p>
+            <h3>SEO</h3>
+            <p class="svc-line">Found on Google when it matters.</p>
+            <p class="svc-tag">Local search that brings footfall</p>
+            <a class="svc-link" href="contact.html">Talk to us about this <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="svc" data-reveal>
+            <p class="svc-no">06</p>
+            <h3>Branding</h3>
+            <p class="svc-line">A brand people remember.</p>
+            <p class="svc-tag">Identity, voice, presence</p>
+            <a class="svc-link" href="contact.html">Talk to us about this <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. SELECTED WORK ============ -->
+    <section class="section work" id="work" aria-labelledby="work-h">
+      <div class="wrap">
+        <p class="eyebrow" data-reveal>Selected work</p>
+        <h2 id="work-h" data-reveal>Twelve concepts.<br>One standard: premium.</h2>
+        <p class="work-frame" data-reveal>Concept work &amp; studio experiments — honest work from the studio, never fake client claims.</p>
+
+        <div class="panel-grid">
+          <article class="panel" data-reveal>
+            <a class="panel-link" href="work.html?cat=websites" data-cursor="view">
+              <div class="mock" aria-hidden="true">
+                <div class="mock-bar"><i></i><i></i><i></i></div>
+                <div class="mock-body a-hero p1"><b></b><u></u><u class="s"></u></div>
+              </div>
+              <div class="panel-meta"><span class="chip c-web">Websites</span>
+                <h3>Monsoon Villa Stays</h3>
+                <p>A booking site that sells the stay before the scroll ends.</p>
+              </div>
+            </a>
+          </article>
+          <article class="panel" data-reveal>
+            <a class="panel-link" href="work.html?cat=websites" data-cursor="view">
+              <div class="mock" aria-hidden="true">
+                <div class="mock-bar"><i></i><i></i><i></i></div>
+                <div class="mock-body a-grid p2"><b></b><b></b><b></b><b></b></div>
+              </div>
+              <div class="panel-meta"><span class="chip c-web">Websites</span>
+                <h3>Churu Textiles Co.</h3>
+                <p>A catalogue site built to win export enquiries.</p>
+              </div>
+            </a>
+          </article>
+          <article class="panel" data-reveal>
+            <a class="panel-link" href="work.html?cat=automation" data-cursor="view">
+              <div class="mock" aria-hidden="true">
+                <div class="mock-bar"><i></i><i></i><i></i></div>
+                <div class="mock-body a-flow p3"><b></b><b></b><b></b><b></b></div>
+              </div>
+              <div class="panel-meta"><span class="chip c-auto">Automation</span>
+                <h3>PipeAuto</h3>
+                <p>Every lead followed up in 60 seconds — automatically.</p>
+              </div>
+            </a>
+          </article>
+          <article class="panel" data-reveal>
+            <a class="panel-link" href="work.html?cat=automation" data-cursor="view">
+              <div class="mock" aria-hidden="true">
+                <div class="mock-bar"><i></i><i></i><i></i></div>
+                <div class="mock-body a-flow p4"><b></b><b></b><b></b><b></b></div>
+              </div>
+              <div class="panel-meta"><span class="chip c-auto">Automation</span>
+                <h3>InvoicePilot</h3>
+                <p>Invoices raised, reminders sent, zero chasing.</p>
+              </div>
+            </a>
+          </article>
+          <article class="panel" data-reveal>
+            <a class="panel-link" href="work.html?cat=chatbots" data-cursor="view">
+              <div class="mock" aria-hidden="true">
+                <div class="mock-bar"><i></i><i></i><i></i></div>
+                <div class="mock-body a-chat p5"><b></b><u></u><b></b><u></u></div>
+              </div>
+              <div class="panel-meta"><span class="chip c-bot">AI Chatbots</span>
+                <h3>Concierge AI</h3>
+                <p>Guest questions answered before they reach the front desk.</p>
+              </div>
+            </a>
+          </article>
+          <article class="panel" data-reveal>
+            <a class="panel-link" href="work.html?cat=chatbots" data-cursor="view">
+              <div class="mock" aria-hidden="true">
+                <div class="mock-bar"><i></i><i></i><i></i></div>
+                <div class="mock-body a-chat p6"><u></u><b></b><u></u><b></b></div>
+              </div>
+              <div class="panel-meta"><span class="chip c-bot">AI Chatbots</span>
+                <h3>AdmitHelp</h3>
+                <p>Admission FAQs answered around the clock.</p>
+              </div>
+            </a>
+          </article>
+          <article class="panel" data-reveal>
+            <a class="panel-link" href="work.html?cat=whatsapp" data-cursor="view">
+              <div class="mock" aria-hidden="true">
+                <div class="mock-bar"><i></i><i></i><i></i></div>
+                <div class="mock-body a-wa p7"><b></b><b></b><b></b></div>
+              </div>
+              <div class="panel-meta"><span class="chip c-wa">WhatsApp</span>
+                <h3>CartSaver WA</h3>
+                <p>Every abandoned cart gets a nudge in seconds.</p>
+              </div>
+            </a>
+          </article>
+          <article class="panel" data-reveal>
+            <a class="panel-link" href="work.html?cat=whatsapp" data-cursor="view">
+              <div class="mock" aria-hidden="true">
+                <div class="mock-bar"><i></i><i></i><i></i></div>
+                <div class="mock-body a-wa p8"><b></b><b></b><b></b></div>
+              </div>
+              <div class="panel-meta"><span class="chip c-wa">WhatsApp</span>
+                <h3>BookTable WA</h3>
+                <p>Tables booked straight from a chat.</p>
+              </div>
+            </a>
+          </article>
+          <article class="panel" data-reveal>
+            <a class="panel-link" href="work.html?cat=seo" data-cursor="view">
+              <div class="mock" aria-hidden="true">
+                <div class="mock-bar"><i></i><i></i><i></i></div>
+                <div class="mock-body a-chart p9"><b></b><b></b><b></b><b></b><b></b></div>
+              </div>
+              <div class="panel-meta"><span class="chip c-seo">SEO</span>
+                <h3>RankMap Local</h3>
+                <p>Found on Google when it matters.</p>
+              </div>
+            </a>
+          </article>
+          <article class="panel" data-reveal>
+            <a class="panel-link" href="work.html?cat=seo" data-cursor="view">
+              <div class="mock" aria-hidden="true">
+                <div class="mock-bar"><i></i><i></i><i></i></div>
+                <div class="mock-body a-chart p10"><b></b><b></b><b></b><b></b><b></b></div>
+              </div>
+              <div class="panel-meta"><span class="chip c-seo">SEO</span>
+                <h3>Service Pages Sprint</h3>
+                <p>One page per service, built to rank.</p>
+              </div>
+            </a>
+          </article>
+          <article class="panel" data-reveal>
+            <a class="panel-link" href="work.html?cat=branding" data-cursor="view">
+              <div class="mock" aria-hidden="true">
+                <div class="mock-bar"><i></i><i></i><i></i></div>
+                <div class="mock-body a-brand p11"><b>N</b><u></u><u></u></div>
+              </div>
+              <div class="panel-meta"><span class="chip c-brand">Branding</span>
+                <h3>Neon Chai Co.</h3>
+                <p>A brand people remember after one scroll.</p>
+              </div>
+            </a>
+          </article>
+          <article class="panel" data-reveal>
+            <a class="panel-link" href="work.html?cat=branding" data-cursor="view">
+              <div class="mock" aria-hidden="true">
+                <div class="mock-bar"><i></i><i></i><i></i></div>
+                <div class="mock-body a-brand p12"><b>S</b><u></u><u></u></div>
+              </div>
+              <div class="panel-meta"><span class="chip c-brand">Branding</span>
+                <h3>Shekhawati Crafts</h3>
+                <p>Heritage craft, modern identity.</p>
+              </div>
+            </a>
+          </article>
+        </div>
+
+        <p class="work-more" data-reveal><a class="btn btn-ghost" href="work.html">Explore all 1,000 <span aria-hidden="true">→</span></a></p>
+      </div>
+    </section>
+
+    <!-- ============ 4. WHY IGRYBUILDS ============ -->
+    <section class="section why" id="why" aria-labelledby="why-h">
+      <div class="wrap">
+        <p class="eyebrow" data-reveal>Why IGRYbuilds</p>
+        <h2 id="why-h" data-reveal>Built like an owner,<br>because it is one.</h2>
+
+        <div class="why-grid">
+          <article class="why-card" data-reveal>
+            <p class="why-no">I</p>
+            <h3>Founder-led</h3>
+            <p>You talk to Manmohan — the person who designs, builds, and ships your
+              project. No account managers, no handoffs, no telephone game.</p>
+          </article>
+          <article class="why-card" data-reveal>
+            <p class="why-no">II</p>
+            <h3>Premium by default</h3>
+            <p>Every site designed from scratch, by hand. No templates, no shortcuts,
+              no &ldquo;good enough&rdquo;.</p>
+          </article>
+          <article class="why-card" data-reveal>
+            <p class="why-no">III</p>
+            <h3>Automation-first</h3>
+            <p>A website is the start. The real win is the engine behind it —
+              enquiries answered, follow-ups sent, busywork gone.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. ABOUT TEASER ============ -->
+    <section class="section about-teaser" id="about" aria-labelledby="about-h">
+      <div class="wrap about-wrap">
+        <div class="about-photo" data-reveal>
+          <img src="assets/img/founder.webp" alt="Manmohan Sharma, founder of IGRYbuilds" width="640" height="640" loading="lazy">
+        </div>
+        <div class="about-copy">
+          <p class="eyebrow" data-reveal>The founder</p>
+          <h2 id="about-h" data-reveal>I&rsquo;m Manmohan Sharma.</h2>
+          <p data-reveal>I&rsquo;m 21, from Ratangarh in Rajasthan&rsquo;s Shekhawati region, and I founded
+            IGRYbuilds in March 2026 on one belief: a small business here deserves the
+            same digital firepower as a big brand anywhere.</p>
+          <p data-reveal><a class="text-link" href="about.html">More about me <span aria-hidden="true">→</span></a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6. CONTACT CTA ============ -->
+    <section class="section cta" id="contact" aria-labelledby="cta-h">
+      <div class="wrap cta-box" data-reveal>
+        <p class="eyebrow">Let&rsquo;s talk</p>
+        <h2 id="cta-h">Tell me what you need.<br>I&rsquo;ll tell you honestly what it&rsquo;ll take.</h2>
+        <p class="cta-sub">Free 20-minute consultation. No pitch, no pressure — and a reply within 24 hours.</p>
+        <div class="cta-row">
+          <a class="btn btn-hot btn-lg" href="contact.html">Start a project <span aria-hidden="true">→</span></a>
+          <a class="btn btn-wa btn-lg" href="https://wa.me/917014257991" target="_blank" rel="noopener">WhatsApp me</a>
+        </div>
+        <p class="cta-contact">
+          <button class="copy-chip" type="button" data-copy="+917014257991" aria-label="Copy phone number">+91 70142 57991</button>
+          <span class="dot" aria-hidden="true">·</span>
+          <button class="copy-chip" type="button" data-copy="igrybuilds@gmail.com" aria-label="Copy email address">igrybuilds@gmail.com</button>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SHARED FOOTER (identical on every page) -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <p class="foot-sign" data-reveal>— Manmohan, founder of IGRYbuilds</p>
+      <p class="foot-cta" data-reveal><a class="text-link" href="contact.html">Have a project in mind? Let&rsquo;s talk <span aria-hidden="true">→</span></a></p>
+      <div class="foot-grid">
+        <nav class="foot-nav" aria-label="Footer">
+          <a href="work.html">Work</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <p class="foot-contact">
+          <a href="tel:+917014257991">+91 70142 57991</a><br>
+          <a href="mailto:igrybuilds@gmail.com">igrybuilds@gmail.com</a>
+        </p>
+      </div>
+      <p class="foot-made">Built by hand in Rajasthan, India. <span class="foot-year">© <span id="year">2026</span> IGRYbuilds.</span></p>
+    </div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP (all pages) -->
+  <a class="wa-float" href="https://wa.me/917014257991" target="_blank" rel="noopener"
+     aria-label="Chat with IGRYbuilds on WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+      <path fill="currentColor" d="M16 3C9.4 3 4 8.4 4 15c0 2.4.7 4.6 2 6.5L4 29l7.7-2c1.8 1 3.9 1.5 4.3 1.5 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.4 0-2.8-.4-4-1.1l-.3-.2-4.6 1.2 1.2-4.5-.2-.3c-.8-1.2-1.2-2.7-1.2-4.1 0-5 4-9 9-9s9 4 9 9-4 8.9-9 9zm5-6.7c-.3-.1-1.6-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-1 1.1-.2.2-.3.3-.7.1-.3-.1-1.4-.5-2.6-1.6-.9-.8-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.8-2c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9 1 1.9 2.8 3.9 5.5 5.2 1.9.9 2.7 1 3.6.8.6-.1 1.6-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.4z"/>
+    </svg>
+  </a>
+
+  <!-- Vendor libs (pinned per SHARED-BRIEF) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+
+  <!-- Motion choreography (Builder HERO) + 3D hero (Builder HERO).
+       Referenced here per brief; the files land before integration. -->
+  <script src="assets/js/motion.js"></script>
+  <script src="assets/js/cursor.js"></script>
+  <script src="assets/js/hero.js" type="module"></script>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>

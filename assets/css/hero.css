@@ -1,0 +1,459 @@
+/* ============================================================================
+ * IGRYbuilds — Hero styles + CSS-gradient fallback + glitch + cursor
+ * (hero.css — HERO builder)
+ *
+ * Loaded on all pages. Tokens mirror SHARED-BRIEF:
+ *   --igry-bg: #050508 · --igry-purple: #a855f7 · --igry-magenta: #ec4899
+ *   --igry-cyan: #22d3ee
+ * Display: Oswald/Archivo Narrow · Body/mono: JetBrains Mono
+ * ========================================================================== */
+
+:root {
+  --igry-bg: #050508;
+  --igry-purple: #a855f7;
+  --igry-magenta: #ec4899;
+  --igry-cyan: #22d3ee;
+  --igry-ink: #f4f2fa;
+  --igry-dim: rgba(244, 242, 250, 0.62);
+  --igry-faint: rgba(244, 242, 250, 0.34);
+}
+
+/* --------------------------------------------------------------------------
+ * 1. Hero section shell
+ * -------------------------------------------------------------------------- */
+#igry-hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  background: var(--igry-bg);
+  color: var(--igry-ink);
+  isolation: isolate;
+}
+
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0;
+  transition: opacity 1.8s ease 0.15s;
+  z-index: 0;
+}
+
+/* hero.js adds .is-live after the first WebGL frame renders — the boot
+ * loader (boot.js) fades the scene in on `igry:hero-ready`. */
+#igry-hero.is-live #hero-canvas {
+  opacity: 1;
+}
+
+/* Content floats above the void; scroll scrub drives --hs (0→1). */
+#igry-hero .hero-content {
+  position: relative;
+  z-index: 2;
+  transform: translate3d(0, calc(var(--hs, 0) * 18vh), 0);
+  opacity: calc(1 - var(--hs, 0) * 0.85);
+  will-change: transform, opacity;
+}
+
+#igry-hero .hero-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 50% 10%, transparent 40%, rgba(5, 5, 8, 0.55) 100%),
+    linear-gradient(to bottom, rgba(5, 5, 8, 0.25), transparent 30%, transparent 62%, var(--igry-bg) 100%);
+}
+
+/* Film grain — cheap, static, keeps the void from banding. */
+#igry-hero .hero-noise {
+  position: absolute;
+  inset: -50%;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* --------------------------------------------------------------------------
+ * 2. CSS-gradient fallback (no WebGL / mobile / reduced motion)
+ *    Applied by hero.js as .hero-fallback — same headline, never broken.
+ * -------------------------------------------------------------------------- */
+#igry-hero.hero-fallback {
+  background:
+    radial-gradient(46% 38% at 22% 30%, rgba(168, 85, 247, 0.28), transparent 70%),
+    radial-gradient(40% 34% at 78% 24%, rgba(236, 72, 153, 0.22), transparent 70%),
+    radial-gradient(52% 42% at 58% 82%, rgba(34, 211, 238, 0.16), transparent 70%),
+    radial-gradient(90% 70% at 50% 50%, rgba(88, 40, 160, 0.12), transparent 75%),
+    var(--igry-bg);
+}
+
+#igry-hero.hero-fallback::before,
+#igry-hero.hero-fallback::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 30% at 30% 60%, rgba(168, 85, 247, 0.20), transparent 70%),
+    radial-gradient(30% 26% at 70% 40%, rgba(34, 211, 238, 0.14), transparent 70%);
+  animation: hero-drift 26s ease-in-out infinite alternate;
+}
+
+#igry-hero.hero-fallback::after {
+  background:
+    radial-gradient(34% 28% at 68% 68%, rgba(236, 72, 153, 0.18), transparent 70%),
+    radial-gradient(26% 22% at 28% 28%, rgba(168, 85, 247, 0.14), transparent 70%);
+  animation-duration: 34s;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes hero-drift {
+  from { transform: translate3d(-3%, -2%, 0) scale(1); }
+  to   { transform: translate3d(3%, 2%, 0) scale(1.08); }
+}
+
+/* --------------------------------------------------------------------------
+ * 3. Hero typography (structural; HOME builder owns final page styles)
+ * -------------------------------------------------------------------------- */
+#igry-hero .hero-kicker {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--igry-cyan);
+}
+
+#igry-hero .hero-title {
+  font-family: Oswald, "Archivo Narrow", "Arial Narrow", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.94;
+  letter-spacing: 0.01em;
+  font-size: clamp(3rem, 11vw, 9.5rem);
+  margin: 0.35em 0 0.3em;
+  text-wrap: balance;
+}
+
+#igry-hero .hero-title .neon {
+  color: transparent;
+  background: linear-gradient(100deg, var(--igry-purple), var(--igry-magenta) 55%, var(--igry-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 22px rgba(168, 85, 247, 0.45));
+}
+
+#igry-hero .hero-sub {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: clamp(0.8rem, 1.6vw, 0.95rem);
+  line-height: 1.7;
+  color: var(--igry-dim);
+  max-width: 46ch;
+}
+
+/* Terminal intent menu */
+#igry-hero .hero-intent {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+#igry-hero .hero-intent-prompt {
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  color: var(--igry-faint);
+  text-transform: uppercase;
+}
+
+#igry-hero .hero-intent-prompt::before {
+  content: "> ";
+  color: var(--igry-magenta);
+}
+
+#igry-hero .hero-intent-list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+#igry-hero .hero-intent-list a {
+  display: inline-block;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  border-radius: 999px;
+  color: var(--igry-ink);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: rgba(168, 85, 247, 0.06);
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+#igry-hero .hero-intent-list a:hover {
+  border-color: var(--igry-cyan);
+  background: rgba(34, 211, 238, 0.08);
+  box-shadow: 0 0 24px rgba(34, 211, 238, 0.25);
+}
+
+/* Scroll cue */
+#igry-hero .hero-scrollcue {
+  position: absolute;
+  left: 50%;
+  bottom: 2rem;
+  z-index: 2;
+  transform: translateX(-50%);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--igry-faint);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+#igry-hero .hero-scrollcue::after {
+  content: "";
+  width: 1px;
+  height: 3.2rem;
+  background: linear-gradient(to bottom, var(--igry-purple), transparent);
+  animation: cue-drop 2.2s ease-in-out infinite;
+}
+
+@keyframes cue-drop {
+  0%, 100% { transform: scaleY(0.4); opacity: 0.4; transform-origin: top; }
+  50% { transform: scaleY(1); opacity: 1; transform-origin: top; }
+}
+
+/* --------------------------------------------------------------------------
+ * 4. Glitch text — RGB-split layers + keyframe tear (hover / .glitching)
+ * -------------------------------------------------------------------------- */
+.u-glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.u-glitch::before,
+.u-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  white-space: inherit;
+}
+
+.u-glitch::before {
+  color: var(--igry-cyan);
+  z-index: -1;
+}
+
+.u-glitch::after {
+  color: var(--igry-magenta);
+  z-index: -2;
+}
+
+.u-glitch:hover::before,
+.u-glitch.glitching::before,
+.u-glitch:hover::after,
+.u-glitch.glitching::after {
+  opacity: 0.85;
+  animation: glitch-shift 0.45s steps(2, end) infinite;
+}
+
+.u-glitch:hover::after,
+.u-glitch.glitching::after {
+  animation-delay: 0.12s;
+  animation-direction: reverse;
+}
+
+@keyframes glitch-shift {
+  0%   { transform: translate(0); clip-path: inset(12% 0 74% 0); }
+  25%  { transform: translate(-3px, 2px); clip-path: inset(58% 0 8% 0); }
+  50%  { transform: translate(3px, -1px); clip-path: inset(28% 0 52% 0); }
+  75%  { transform: translate(-2px, -2px); clip-path: inset(80% 0 4% 0); }
+  100% { transform: translate(0); clip-path: inset(8% 0 82% 0); }
+}
+
+/* Masked line-reveal scaffolding (built by motion.js splitLinesReveal). */
+[data-reveal-lines] .rl-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em; /* descender clearance */
+  margin-bottom: -0.08em;
+}
+
+[data-reveal-lines] .rl-inner {
+  display: block;
+  will-change: transform;
+}
+
+[data-reveal-lines] .rl-word {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* --------------------------------------------------------------------------
+ * 5. Custom cursor (cursor.js) — desktop, fine pointer, no reduced motion
+ * -------------------------------------------------------------------------- */
+.igry-cursor,
+.igry-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  will-change: transform;
+}
+
+.igry-cursor {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  mix-blend-mode: difference;
+}
+
+.igry-cursor-ring {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  mix-blend-mode: difference;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.25s ease, width 0.3s ease, height 0.3s ease,
+              background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.igry-cursor.is-on,
+.igry-cursor-ring.is-on {
+  opacity: 1;
+}
+
+.igry-cursor.is-view-hide {
+  opacity: 0;
+}
+
+.igry-cursor-label {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  color: #050508;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  user-select: none;
+}
+
+/* Link / button hover — ring swells. */
+.igry-cursor-ring.is-link {
+  width: 64px;
+  height: 64px;
+  border-color: #fff;
+}
+
+/* [data-cursor="view"] — morphs into a solid VIEW badge. */
+.igry-cursor-ring.is-view {
+  width: 92px;
+  height: 92px;
+  background: #fff;
+  border-color: #fff;
+  mix-blend-mode: normal;
+}
+
+.igry-cursor-ring.is-view .igry-cursor-label {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.igry-cursor.is-down {
+  transform-origin: center;
+  scale: 0.6;
+}
+
+/* Over form fields: native cursor (I-beam) stays, ours gets out of the way. */
+.igry-cursor.is-field,
+.igry-cursor-ring.is-field {
+  opacity: 0;
+}
+
+.igry-cursor-ring.is-down {
+  width: 30px;
+  height: 30px;
+}
+
+/* Native cursor hides only when the JS cursor is actually running —
+ * form fields keep their native cursor (see .is-field above). */
+html.has-cursor,
+html.has-cursor a,
+html.has-cursor button,
+html.has-cursor [data-cursor],
+html.has-cursor [data-magnetic] {
+  cursor: none;
+}
+
+@media (hover: none), (pointer: coarse), (max-width: 899px) {
+  .igry-cursor,
+  .igry-cursor-ring {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+ * 6. Cross-document view transitions (progressive enhancement)
+ * -------------------------------------------------------------------------- */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --------------------------------------------------------------------------
+ * 7. Reduced motion + small screens
+ * -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  #igry-hero.hero-fallback::before,
+  #igry-hero.hero-fallback::after,
+  #igry-hero .hero-scrollcue::after {
+    animation: none;
+  }
+
+  #hero-canvas {
+    transition: none;
+  }
+
+  .u-glitch:hover::before,
+  .u-glitch.glitching::before,
+  .u-glitch:hover::after,
+  .u-glitch.glitching::after {
+    animation: none;
+    opacity: 0;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
+@media (max-width: 899px) {
+  #igry-hero .hero-content {
+    /* No scrub parallax on touch — keeps INP clean. */
+    transform: none;
+    opacity: 1;
+  }
+}
