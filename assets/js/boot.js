@@ -19,6 +19,13 @@
   var pctEl = boot.querySelector("[data-boot-pct]");
   var done = false;
 
+  /* HERO-INTEGRATION contract: hero.js dispatches `igry:hero-ready`
+     (detail {mode: 'webgl'|'fallback'}) once the scene is up. If the
+     counter is done and the hero is ready, fade the loader now —
+     no need to wait out the full LOAD_GRACE for window load. */
+  var heroReady = false;
+  window.addEventListener("igry:hero-ready", function () { heroReady = true; });
+
   function lock(on) {
     document.documentElement.style.overflow = on ? "hidden" : "";
   }
@@ -68,7 +75,7 @@
       var waited = 0;
       (function waitForLoad() {
         if (done) return;
-        if (loaded || waited >= LOAD_GRACE) {
+        if (loaded || heroReady || waited >= LOAD_GRACE) {
           finish();
         } else {
           waited += 60;

@@ -280,6 +280,24 @@ h2 {
 }
 @keyframes cue { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(14px); opacity: 0; } 100% { opacity: 0; } }
 
+/* ---------- Hero layout (HOME builder owns final page styles per HERO-INTEGRATION.md) ----------
+   The hero shell/typography comes from hero.css (Builder HERO); this block
+   centres the contract markup (.hero-content) the way the old .hero did. */
+#igry-hero {
+  display: flex; align-items: center; justify-content: center;
+  padding: calc(var(--nav-h) + 40px) 0 96px;
+}
+#igry-hero .hero-content {
+  width: min(1060px, 92vw);
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+}
+#igry-hero .hero-sub { margin-left: auto; margin-right: auto; }
+#igry-hero .hero-ctas { margin-top: 30px; }
+#igry-hero .hero-proof { margin: 18px 0 0; }
+#igry-hero .hero-intent { margin-top: 48px; width: 100%; max-width: 640px; }
+#igry-hero .hero-intent-list { justify-content: center; }
+
 /* ---------- Services ---------- */
 .services h2 { margin-bottom: 48px; }
 .svc-grid {

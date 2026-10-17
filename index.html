@@ -3,11 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IGRYbuilds — Websites that win customers. Automation that never sleeps.</title>
-  <meta name="description" content="IGRYbuilds is a founder-led agency in Rajasthan, India. Premium websites and smart automation that help local businesses win more customers. Replies within 24 hours.">
-  <meta property="og:title" content="IGRYbuilds — Websites that win customers. Automation that never sleeps.">
-  <meta property="og:description" content="Premium websites + smart automation for local businesses. Founder-led, built by hand in Rajasthan, India.">
+  <title>IGRYbuilds — Premium Websites &amp; Automation, Rajasthan</title>
+  <meta name="description" content="Founder-led studio in Rajasthan, India. Premium websites and smart automation that help local businesses win more customers. Replies within 24 hours.">
+  <link rel="canonical" href="https://igrybuilds.pages.dev/">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IGRYbuilds">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="IGRYbuilds — Premium Websites &amp; Automation, Rajasthan">
+  <meta property="og:description" content="Premium websites + smart automation for local businesses. Founder-led, built by hand in Rajasthan, India.">
+  <meta property="og:url" content="https://igrybuilds.pages.dev/">
+  <meta property="og:image" content="https://igrybuilds.pages.dev/assets/img/founder.webp">
+  <meta property="og:image:width" content="720">
+  <meta property="og:image:height" content="1280">
+  <meta property="og:image:alt" content="Manmohan Sharma, founder of IGRYbuilds">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="IGRYbuilds — Premium Websites &amp; Automation, Rajasthan">
+  <meta name="twitter:description" content="Premium websites + smart automation for local businesses. Founder-led, built by hand in Rajasthan, India.">
+  <meta name="twitter:image" content="https://igrybuilds.pages.dev/assets/img/founder.webp">
   <meta name="theme-color" content="#050508">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,12 +29,76 @@
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/hero.css">
 
+  <!-- Importmap BEFORE any module script (hero.js lazy-imports three via these specifiers). -->
   <script type="importmap">
   {
     "imports": {
       "three": "https://cdn.jsdelivr.net/npm/three@0.183.2/build/three.module.js",
       "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.183.2/examples/jsm/"
     }
+  }
+  </script>
+
+  <!-- Vendor libs (pinned per SHARED-BRIEF) -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.2/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.2/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+
+  <!-- Our scripts, in contract order, all deferred (HERO-INTEGRATION.md).
+       motion.js/cursor.js/hero.js self-initialise; boot.js fades the loader
+       on `igry:hero-ready` (or its own safety timeout); site.js wires chrome. -->
+  <script defer src="assets/js/motion.js"></script>
+  <script defer src="assets/js/hero.js" type="module"></script>
+  <script defer src="assets/js/cursor.js"></script>
+  <script defer src="assets/js/boot.js"></script>
+  <script defer src="assets/js/site.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "IGRYbuilds",
+    "url": "https://igrybuilds.pages.dev/",
+    "logo": "https://igrybuilds.pages.dev/assets/img/founder.webp",
+    "foundingDate": "2026-03",
+    "description": "Premium websites and smart automation for local businesses, built by hand in Rajasthan, India.",
+    "founder": { "@type": "Person", "name": "Manmohan Sharma" },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Ratangarh",
+      "addressRegion": "Rajasthan",
+      "postalCode": "331802",
+      "addressCountry": "IN"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91-7014257991",
+      "email": "igrybuilds@gmail.com",
+      "contactType": "sales"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "IGRYbuilds",
+    "url": "https://igrybuilds.pages.dev/"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "IGRYbuilds services",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "item": { "@type": "Service", "name": "Premium Websites", "provider": { "@type": "Organization", "name": "IGRYbuilds" }, "areaServed": "IN", "description": "Premium websites designed and built from scratch for local businesses." } },
+      { "@type": "ListItem", "position": 2, "item": { "@type": "Service", "name": "Automation", "provider": { "@type": "Organization", "name": "IGRYbuilds" }, "areaServed": "IN", "description": "Workflow automation that removes busywork from a local business." } },
+      { "@type": "ListItem", "position": 3, "item": { "@type": "Service", "name": "AI Chatbots", "provider": { "@type": "Organization", "name": "IGRYbuilds" }, "areaServed": "IN", "description": "AI chatbots trained on a business, answering questions 24/7." } },
+      { "@type": "ListItem", "position": 4, "item": { "@type": "Service", "name": "WhatsApp Systems", "provider": { "@type": "Organization", "name": "IGRYbuilds" }, "areaServed": "IN", "description": "WhatsApp flows, follow-ups and bookings for enquiries." } },
+      { "@type": "ListItem", "position": 5, "item": { "@type": "Service", "name": "SEO", "provider": { "@type": "Organization", "name": "IGRYbuilds" }, "areaServed": "IN", "description": "Local search optimisation that brings footfall and enquiries." } },
+      { "@type": "ListItem", "position": 6, "item": { "@type": "Service", "name": "Branding", "provider": { "@type": "Organization", "name": "IGRYbuilds" }, "areaServed": "IN", "description": "Identity, voice and presence a business's customers remember." } }
+    ]
   }
   </script>
 </head>
@@ -38,7 +114,7 @@
       <p class="boot-sub">warming up the engine…</p>
     </div>
   </div>
-  <script src="assets/js/boot.js"></script>
+  <!-- boot.js loads deferred from <head> (HERO-INTEGRATION.md contract) -->
 
   <!-- SHARED NAV (identical on every page) -->
   <header class="site-nav" id="siteNav">
@@ -72,43 +148,39 @@
   <main id="main">
 
     <!-- ============ 1. HERO ============ -->
-    <section class="hero" id="top" aria-label="Introduction">
-      <!-- hero.js (Builder HERO) wires Three.js into #hero-canvas.
-           .hero-bg carries a CSS-gradient fallback for no-WebGL / no-JS. -->
-      <div class="hero-bg" aria-hidden="true">
-        <canvas id="hero-canvas"></canvas>
-      </div>
-
-      <div class="hero-inner">
-        <p class="eyebrow" data-reveal>Founder-led agency · Rajasthan, India</p>
-        <h1 class="hero-h1" data-reveal>
-          <span class="glow-a">Websites that win customers.</span><br>
-          <span class="glow-b">Automation that never sleeps.</span>
+    <!-- Markup per HERO-INTEGRATION.md: hero.js wires Three.js into
+         #hero-canvas (created if absent), adds .is-live / .hero-fallback,
+         and dispatches `igry:hero-ready` — motion.js plays [data-hero-intro]
+         and boot.js fades the loader on that event. -->
+    <section id="igry-hero" data-hero aria-label="Introduction">
+      <canvas id="hero-canvas"></canvas>
+      <div class="hero-vignette"></div>
+      <div class="hero-content">
+        <p class="hero-kicker" data-hero-intro>Founder-led agency · Rajasthan, India</p>
+        <h1 class="hero-title" data-hero-intro>
+          <span class="neon">Websites that win customers.</span><br>
+          Automation that never sleeps.
         </h1>
-        <p class="hero-sub" data-reveal>IGRYbuilds builds premium websites and smart automation for local
-          businesses — so you get more enquiries while you focus on your work.</p>
-
-        <div class="hero-ctas" data-reveal>
+        <p class="hero-sub" data-hero-intro>Premium websites and smart automation that help local businesses
+          win more customers — so you get more enquiries while you focus on your work.</p>
+        <div class="hero-ctas" data-hero-intro>
           <a class="btn btn-hot" href="contact.html">Start a project <span aria-hidden="true">→</span></a>
           <a class="btn btn-ghost" href="pricing.html">Estimate your cost</a>
         </div>
-        <p class="hero-proof" data-reveal>Replies within 24 hours · 100% custom-built, no templates</p>
-
-        <div class="intent" data-reveal>
-          <p class="intent-prompt"><span class="intent-cursor" aria-hidden="true">&gt;</span> WHAT ARE YOU LOOKING FOR?</p>
-          <ul class="intent-list">
-            <li><a href="work.html?cat=websites"><span class="k">01</span>Websites</a></li>
-            <li><a href="work.html?cat=automation"><span class="k">02</span>Automation</a></li>
-            <li><a href="work.html?cat=chatbots"><span class="k">03</span>AI&nbsp;Chatbots</a></li>
-            <li><a href="work.html?cat=whatsapp"><span class="k">04</span>WhatsApp</a></li>
-            <li><a href="work.html?cat=seo"><span class="k">05</span>SEO</a></li>
+        <p class="hero-proof" data-hero-intro>Replies within 24 hours · 100% custom-built, no templates</p>
+        <nav class="hero-intent" data-hero-intro aria-label="Find what you need">
+          <p class="hero-intent-prompt">What are you looking for?</p>
+          <ul class="hero-intent-list">
+            <li><a href="work.html?cat=websites">Websites</a></li>
+            <li><a href="work.html?cat=automation">Automation</a></li>
+            <li><a href="work.html?cat=chatbots">AI Chatbots</a></li>
+            <li><a href="work.html?cat=whatsapp">WhatsApp</a></li>
+            <li><a href="work.html?cat=seo">SEO</a></li>
           </ul>
-        </div>
+        </nav>
       </div>
-
-      <a class="hero-scroll" href="#services" data-scroll aria-label="Scroll to services">
-        <span></span>
-      </a>
+      <div class="hero-scrollcue">Scroll</div>
+      <div class="hero-noise"></div>
     </section>
 
     <!-- ============ 2. SERVICES ============ -->
@@ -417,16 +489,5 @@
     </svg>
   </a>
 
-  <!-- Vendor libs (pinned per SHARED-BRIEF) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.2/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
-
-  <!-- Motion choreography (Builder HERO) + 3D hero (Builder HERO).
-       Referenced here per brief; the files land before integration. -->
-  <script src="assets/js/motion.js"></script>
-  <script src="assets/js/cursor.js"></script>
-  <script src="assets/js/hero.js" type="module"></script>
-  <script src="assets/js/site.js"></script>
 </body>
 </html>
