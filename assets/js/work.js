@@ -54,15 +54,15 @@
   ];
 
   var PAL_NAMES = [
-    "Ultraviolet", "Neon Bloom", "Ion Storm", "Violet Haze", "Fuchsia Drive",
-    "Skyline", "Cotton Candy", "Lagoon", "Ultraviolet Rose", "Deep Current",
-    "Magenta Shift", "Lavender Drift"
+    "Terracotta & Ochre", "Umber & Clay", "Bronze & Tan", "Rust & Amber",
+    "Sienna & Sand", "Sienna & Gold", "Dark Bronze & Gold", "Terracotta & Umber",
+    "Clay & Terracotta", "Sienna & Rust", "Rust & Clay", "Bronze & Amber"
   ];
   var PAL_HEX = [
-    ["#a855f7", "#ec4899"], ["#ec4899", "#22d3ee"], ["#22d3ee", "#a855f7"],
-    ["#8b5cf6", "#f472b6"], ["#d946ef", "#6366f1"], ["#38bdf8", "#a855f7"],
-    ["#f472b6", "#8b5cf6"], ["#2dd4bf", "#a855f7"], ["#a855f7", "#fb7185"],
-    ["#22d3ee", "#60a5fa"], ["#ec4899", "#8b5cf6"], ["#c084fc", "#22d3ee"]
+    ["#B4502E", "#D9A441"], ["#8C5A3B", "#C97B4E"], ["#6B4F2E", "#B98A4B"],
+    ["#93391F", "#E0A458"], ["#7A4A2B", "#D9B382"], ["#A0522D", "#C9A227"],
+    ["#5F4A33", "#D9A441"], ["#B4502E", "#8C5A3B"], ["#C97B4E", "#B4502E"],
+    ["#7A4A2B", "#93391F"], ["#93391F", "#C98F4E"], ["#6B4F2E", "#E0A458"]
   ];
 
   function calDays() {

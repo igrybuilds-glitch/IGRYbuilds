@@ -20,7 +20,7 @@
   var done = false;
 
   /* HERO-INTEGRATION contract: hero.js dispatches `igry:hero-ready`
-     (detail {mode: 'webgl'|'fallback'}) once the scene is up. If the
+     (detail {mode: 'canvas'|'fallback'}) once the scene is up. If the
      counter is done and the hero is ready, fade the loader now —
      no need to wait out the full LOAD_GRACE for window load. */
   var heroReady = false;
@@ -61,10 +61,30 @@
 
   window.addEventListener("load", function () { loaded = true; });
 
+  /* The one authored easing: cubic-bezier(0.22, 1, 0.36, 1) */
+  function authoredEase(p) {
+    if (p <= 0) return 0;
+    if (p >= 1) return 1;
+    var cx = 0.66, bx = -0.24, ax = 0.58;   /* x1=0.22, x2=0.36 */
+    var cy = 3.0, by = -3.0, ay = 1.0;        /* y1=1, y2=1 */
+    function sx(t) { return ((ax * t + bx) * t + cx) * t; }
+    function sy(t) { return ((ay * t + by) * t + cy) * t; }
+    function sdx(t) { return (3 * ax * t + 2 * bx) * t + cx; }
+    var t = p, i, err, d;
+    for (i = 0; i < 8; i++) {
+      err = sx(t) - p;
+      if (Math.abs(err) < 1e-6) break;
+      d = sdx(t);
+      if (Math.abs(d) < 1e-6) break;
+      t -= err / d;
+    }
+    return sy(Math.max(0, Math.min(1, t)));
+  }
+
   function frame(now) {
     if (done) return;
     var t = Math.min(1, ((now || Date.now()) - start) / DURATION);
-    var eased = 1 - Math.pow(1 - t, 3); /* easeOutCubic */
+    var eased = authoredEase(t);
     if (pctEl) {
       var v = Math.floor(eased * 100);
       pctEl.textContent = (v < 10 ? "00" : v < 100 ? "0" : "") + v;

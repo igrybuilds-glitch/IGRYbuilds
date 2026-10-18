@@ -1,18 +1,19 @@
 /* ============================================================================
- * IGRYbuilds — Global Motion System (motion.js)
- * Loaded on EVERY page (defer). Owns: Lenis smooth scroll, GSAP/ScrollTrigger
- * wiring, reveal-on-scroll choreography, glitch text reveals, magnetic
- * buttons, hero intro coordination, and global rAF/loop pausing.
+ * IGRYbuilds — Global Motion System (motion.js, 2026-10-18 redesign)
+ * Loaded on the homepage (defer). Owns: Lenis smooth scroll, GSAP/ScrollTrigger
+ * wiring, masked line-reveal choreography, magnetic buttons, hero intro
+ * coordination, and global rAF/loop pausing.
+ *
+ * Motion language: ONE authored easing — cubic-bezier(0.22, 1, 0.36, 1) —
+ * used for everything. Reveals are masked line reveals
+ * (overflow:hidden wrapper + translateY(112%)→0), 900ms, 60ms stagger.
+ * No glitch, no flicker, no scramble.
  *
  * Conventions for markup (built by other builders):
- *   [data-reveal]            fade-up reveal on scroll into view
- *     data-reveal="up|down|left|right|fade|scale"   (default "up")
- *     data-reveal-delay="0.15"                     stagger/offset seconds
- *   [data-reveal-group] > [data-reveal-item]        staggered group reveal
+ *   [data-reveal]            masked line reveal on scroll into view
+ *     data-reveal-delay="0.15"                 stagger/offset seconds
+ *   [data-reveal-group] > [data-reveal-item]  staggered group reveal
  *   [data-reveal-lines]      headline split into masked lines, rise on enter
- *   [data-glitch]            scramble-decode text reveal on scroll enter
- *     (optional) data-glitch="EXACT TEXT"           explicit final text
- *   [data-glitch-hover]      quick scramble on hover (nav links, labels)
  *   [data-magnetic]          magnetic pull toward cursor (desktop only)
  *   [data-hero-intro]        hero entrance items (played on igry:hero-ready)
  *   [data-cursor="view"]     cursor morphs into "VIEW" badge (cursor.js)
@@ -32,6 +33,41 @@
 
   window.IGRY = window.IGRY || {};
   var IGRY = window.IGRY;
+
+  /* ------------------------------------------------------------------ */
+  /* The one authored easing: cubic-bezier(0.22, 1, 0.36, 1)               */
+  /* ------------------------------------------------------------------ */
+  function cubicBezierEasing(x1, y1, x2, y2) {
+    var cx = 3 * x1, bx = 3 * (x2 - x1) - cx, ax = 1 - cx - bx;
+    var cy = 3 * y1, by = 3 * (y2 - y1) - cy, ay = 1 - cy - by;
+    function sampleX(t) { return ((ax * t + bx) * t + cx) * t; }
+    function sampleY(t) { return ((ay * t + by) * t + cy) * t; }
+    function sampleDX(t) { return (3 * ax * t + 2 * bx) * t + cx; }
+    function solveX(x) {
+      var t = x, i, err, d;
+      for (i = 0; i < 8; i++) {
+        err = sampleX(t) - x;
+        if (Math.abs(err) < 1e-6) return t;
+        d = sampleDX(t);
+        if (Math.abs(d) < 1e-6) break;
+        t -= err / d;
+      }
+      var lo = 0, hi = 1;
+      t = x;
+      while (hi - lo > 1e-6) {
+        if (Math.abs(sampleX(t) - x) < 1e-6) return t;
+        if (x > sampleX(t)) lo = t; else hi = t;
+        t = (hi - lo) * 0.5 + lo;
+      }
+      return t;
+    }
+    return function (p) {
+      if (p <= 0) return 0;
+      if (p >= 1) return 1;
+      return sampleY(solveX(p));
+    };
+  }
+  var EASE = cubicBezierEasing(0.22, 1, 0.36, 1);
 
   /* ------------------------------------------------------------------ */
   /* Environment                                                          */
@@ -119,7 +155,7 @@
       state.lenis.scrollTo(target, {
         offset: typeof opts.offset === 'number' ? opts.offset : -72,
         duration: reducedMotion() ? 0 : (opts.duration || 1.4),
-        easing: function (t) { return 1 - Math.pow(1 - t, 4); }
+        easing: EASE
       });
     } else if (typeof target === 'string') {
       var el = document.querySelector(target);
@@ -130,49 +166,88 @@
   }
 
   /* ------------------------------------------------------------------ */
-  /* Reveal-on-scroll choreography                                         */
+  /* Masked line reveals                                                   */
+  /* Each [data-reveal] is wrapped in an overflow:hidden mask (JS-built)   */
+  /* and rises translateY(112%)→0 on scroll enter. Unwrapped on complete   */
+  /* so hover lifts / shadows are never clipped afterwards.                */
   /* ------------------------------------------------------------------ */
+  function wrapMask(el) {
+    var parent = el.parentNode;
+    if (!parent) return null;
+    var mask = document.createElement('div');
+    mask.className = 'igry-reveal-mask';
+    parent.insertBefore(mask, el);
+    mask.appendChild(el);
+    return mask;
+  }
+
+  function unwrapMask(el, mask) {
+    var parent = mask.parentNode;
+    if (!parent) return;
+    parent.insertBefore(el, mask);
+    parent.removeChild(mask);
+  }
+
+  function maskedReveal(el, delay, triggerEl) {
+    var gsap = window.gsap;
+    var mask = wrapMask(el);
+    if (!mask) return;
+    el.classList.add('igry-revealing'); // CSS transitions off while GSAP drives
+    gsap.from(el, {
+      yPercent: 112,
+      duration: 0.9,
+      ease: EASE,
+      delay: delay || 0,
+      overwrite: 'auto',
+      scrollTrigger: { trigger: triggerEl || mask, start: 'top 90%', once: true },
+      onComplete: function () {
+        el.classList.remove('igry-revealing');
+        unwrapMask(el, mask);
+        gsap.set(el, { clearProps: 'transform,opacity' });
+      }
+    });
+  }
+
   function initReveals() {
     if (!hasGSAP() || reducedMotion()) return;
     var gsap = window.gsap;
 
-    if (hasGSAP() && window.ScrollTrigger) {
+    if (window.ScrollTrigger) {
       window.ScrollTrigger.config({ ignoreMobileResize: true });
     }
 
-    // Single-attribute reveals.
+    // Single-attribute masked reveals.
     gsap.utils.toArray('[data-reveal]').forEach(function (el) {
-      var kind = (el.getAttribute('data-reveal') || 'up').toLowerCase();
       var delay = parseFloat(el.getAttribute('data-reveal-delay') || '0', 10) || 0;
-      var vars = {
-        opacity: 0,
-        duration: 1,
-        delay: delay,
-        ease: 'power3.out',
-        overwrite: 'auto',
-        scrollTrigger: { trigger: el, start: 'top 88%', once: true }
-      };
-      if (kind === 'up') vars.y = 36;
-      else if (kind === 'down') vars.y = -36;
-      else if (kind === 'left') vars.x = 48;
-      else if (kind === 'right') vars.x = -48;
-      else if (kind === 'scale') vars.scale = 0.94;
-      // "fade" leaves transform alone.
-      gsap.from(el, vars);
+      maskedReveal(el, delay);
     });
 
-    // Staggered groups.
+    // Staggered groups — 60ms between items.
     gsap.utils.toArray('[data-reveal-group]').forEach(function (group) {
       var items = group.querySelectorAll('[data-reveal-item]');
       if (!items.length) return;
-      gsap.from(items, {
-        opacity: 0,
-        y: 30,
+      var wrapped = [];
+      Array.prototype.forEach.call(items, function (item, i) {
+        var mask = wrapMask(item);
+        if (mask) wrapped.push({ el: item, mask: mask, i: i });
+      });
+      if (!wrapped.length) return;
+      var wrappedEls = wrapped.map(function (w) { return w.el; });
+      wrappedEls.forEach(function (el) { el.classList.add('igry-revealing'); });
+      gsap.from(wrappedEls, {
+        yPercent: 112,
         duration: 0.9,
-        ease: 'power3.out',
-        stagger: 0.08,
+        ease: EASE,
+        stagger: 0.06,
         overwrite: 'auto',
-        scrollTrigger: { trigger: group, start: 'top 85%', once: true }
+        scrollTrigger: { trigger: group, start: 'top 88%', once: true },
+        onComplete: function () {
+          wrapped.forEach(function (w) {
+            w.el.classList.remove('igry-revealing');
+            unwrapMask(w.el, w.mask);
+            gsap.set(w.el, { clearProps: 'transform,opacity' });
+          });
+        }
       });
     });
 
@@ -215,10 +290,7 @@
     var original = el.textContent;
     var words = original.trim().split(/\s+/);
     if (words.length < 2) {
-      gsap.from(el, {
-        opacity: 0, y: 30, duration: 1, ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 88%', once: true }
-      });
+      maskedReveal(el, 0);
       return;
     }
     try {
@@ -270,109 +342,17 @@
       });
 
       gsap.from(lineInners, {
-        yPercent: 115,
-        duration: 1.1,
-        ease: 'power4.out',
-        stagger: 0.09,
+        yPercent: 112,
+        duration: 0.9,
+        ease: EASE,
+        stagger: 0.06,
         overwrite: 'auto',
         scrollTrigger: { trigger: el, start: 'top 88%', once: true }
       });
     } catch (err) {
-      // Measurement failed (hidden element, odd layout) — restore + fade.
+      // Measurement failed (hidden element, odd layout) — restore + masked reveal.
       el.textContent = original;
-      gsap.from(el, {
-        opacity: 0, y: 30, duration: 1, ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 88%', once: true }
-      });
-    }
-  }
-
-  /* ------------------------------------------------------------------ */
-  /* Glitch text reveals — scramble decode                                 */
-  /* ------------------------------------------------------------------ */
-  var GLYPHS = '!<>-_\\/[]{}=+*^?#@$%&01';
-
-  function randomGlyph() {
-    return GLYPHS.charAt(Math.floor(Math.random() * GLYPHS.length));
-  }
-
-  /**
-   * Scramble-decode `el` into its final text. Uses rAF; bails instantly when
-   * the tab is hidden or reduced-motion is on (final text set directly).
-   */
-  function scrambleTo(el, finalText, duration) {
-    duration = duration || 1100;
-    var live = el.querySelector('.glitch-live');
-    if (!live) {
-      live = document.createElement('span');
-      live.className = 'glitch-live';
-      live.setAttribute('aria-hidden', 'true');
-      el.innerHTML = '';
-      el.appendChild(live);
-    }
-    if (!el.getAttribute('aria-label')) el.setAttribute('aria-label', finalText);
-    if (reducedMotion() || document.hidden) {
-      live.textContent = finalText;
-      return;
-    }
-    var start = null;
-    var len = finalText.length;
-    function frame(now) {
-      if (document.hidden) { live.textContent = finalText; return; }
-      if (start === null) start = now;
-      var p = Math.min(1, (now - start) / duration);
-      // Ease the reveal count so the tail decodes faster.
-      var n = Math.floor(len * (p < 0.6 ? p * p * 1.4 : 0.504 + (p - 0.6) * 1.24));
-      n = Math.max(0, Math.min(len, n));
-      var out = finalText.slice(0, n);
-      for (var i = n; i < len; i++) {
-        out += finalText[i] === ' ' ? ' ' : randomGlyph();
-      }
-      live.textContent = out;
-      if (p < 1) requestAnimationFrame(frame);
-      else live.textContent = finalText;
-    }
-    requestAnimationFrame(frame);
-  }
-
-  function initGlitchReveals() {
-    var els = document.querySelectorAll('[data-glitch]');
-    if (!els.length) return;
-
-    els.forEach(function (el) {
-      var finalText = el.getAttribute('data-glitch') || el.textContent || '';
-      finalText = finalText.trim();
-      if (!finalText) return;
-      // Preserve for screen readers; visual layer scrambles.
-      if (!el.getAttribute('aria-label')) el.setAttribute('aria-label', finalText);
-      el.classList.add('u-glitch');
-      if (!el.getAttribute('data-text')) el.setAttribute('data-text', finalText);
-
-      var play = function () { scrambleTo(el, finalText, 1100); };
-
-      if (!hasGSAP() || reducedMotion()) { play(); return; }
-
-      window.ScrollTrigger.create({
-        trigger: el,
-        start: 'top 88%',
-        once: true,
-        onEnter: play
-      });
-    });
-
-    // Hover scramble for nav links / mono labels.
-    if (!reducedMotion()) {
-      document.querySelectorAll('[data-glitch-hover]').forEach(function (el) {
-        var finalText = (el.getAttribute('data-glitch-hover') || el.textContent || '').trim();
-        if (!finalText) return;
-        var busy = false;
-        el.addEventListener('mouseenter', function () {
-          if (busy) return;
-          busy = true;
-          scrambleTo(el, finalText, 420);
-          setTimeout(function () { busy = false; }, 480);
-        });
-      });
+      maskedReveal(el, 0);
     }
   }
 
@@ -385,8 +365,8 @@
     var gsap = window.gsap;
 
     gsap.utils.toArray('[data-magnetic]').forEach(function (el) {
-      var xTo = gsap.quickTo(el, 'x', { duration: 0.4, ease: 'power3.out' });
-      var yTo = gsap.quickTo(el, 'y', { duration: 0.4, ease: 'power3.out' });
+      var xTo = gsap.quickTo(el, 'x', { duration: 0.4, ease: EASE });
+      var yTo = gsap.quickTo(el, 'y', { duration: 0.4, ease: EASE });
       var strength = parseFloat(el.getAttribute('data-magnetic-strength') || '0.35', 10) || 0.35;
 
       el.addEventListener('mousemove', function (e) {
@@ -395,7 +375,7 @@
         yTo((e.clientY - (r.top + r.height / 2)) * strength);
       });
       el.addEventListener('mouseleave', function () {
-        gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.4)', overwrite: 'auto' });
+        gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: EASE, overwrite: 'auto' });
       });
     });
   }
@@ -415,8 +395,8 @@
       window.gsap.fromTo(items,
         { opacity: 0, y: 44 },
         {
-          opacity: 1, y: 0, duration: 1.2, ease: 'power3.out',
-          stagger: 0.12, overwrite: 'auto', clearProps: 'transform'
+          opacity: 1, y: 0, duration: 0.9, ease: EASE,
+          stagger: 0.06, overwrite: 'auto', clearProps: 'transform'
         });
     };
 
@@ -426,8 +406,8 @@
     }
 
     window.addEventListener('igry:hero-ready', play);
-    // Fallback: if hero.js never fires (fallback CSS hero, script blocked),
-    // still play the intro shortly after load.
+    // Fallback: if hero.js never fires (script blocked), still play the
+    // intro shortly after load.
     state.heroIntroTimer = setTimeout(play, 3500);
   }
 
@@ -470,7 +450,6 @@
     state.lenis = initLenis();
     initAnchorFallback();
     initReveals();
-    initGlitchReveals();
     initMagnetic();
     initHeroIntro();
     initVisibilityPausing();
@@ -503,8 +482,7 @@
       reducedMotion: reducedMotion,
       isDesktop: isDesktop,
       hasGSAP: hasGSAP,
-      hasLenis: hasLenis,
-      randomGlyph: randomGlyph
+      hasLenis: hasLenis
     }
   };
 

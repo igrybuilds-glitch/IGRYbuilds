@@ -1,33 +1,39 @@
 /* ============================================================================
- * IGRYbuilds — Hero styles + CSS-gradient fallback + glitch + cursor
- * (hero.css — HERO builder)
+ * IGRYbuilds — Hero styles + light 2D canvas + custom cursor
+ * (hero.css — light editorial redesign, 2026-10-18)
  *
- * Loaded on all pages. Tokens mirror SHARED-BRIEF:
- *   --igry-bg: #050508 · --igry-purple: #a855f7 · --igry-magenta: #ec4899
- *   --igry-cyan: #22d3ee
- * Display: Oswald/Archivo Narrow · Body/mono: JetBrains Mono
+ * Tokens: --paper #FAF6EE · --ink #211B13 · --accent #B4502E (terracotta)
+ * Display: Fraunces · Body/UI: Inter. One authored easing: var(--ease).
+ * Flat colour only — the canvas carries the single ≤6% radial wash.
  * ========================================================================== */
 
 :root {
-  --igry-bg: #050508;
-  --igry-purple: #a855f7;
-  --igry-magenta: #ec4899;
-  --igry-cyan: #22d3ee;
-  --igry-ink: #f4f2fa;
-  --igry-dim: rgba(244, 242, 250, 0.62);
-  --igry-faint: rgba(244, 242, 250, 0.34);
+  --paper: #FAF6EE;
+  --paper-2: #F2ECDD;
+  --card: #FFFFFF;
+  --ink: #211B13;
+  --ink-soft: #4E4636;
+  --muted: #8C8271;
+  --line: #E2D7BE;
+  --accent: #B4502E;
+  --accent-deep: #93391F;
+  --accent-wash: rgba(180, 80, 46, 0.07);
+  --shadow: 0 18px 40px -24px rgba(33, 27, 19, 0.25);
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* --------------------------------------------------------------------------
- * 1. Hero section shell
+ * 1. Hero section shell — editorial type-as-hero on paper
  * -------------------------------------------------------------------------- */
 #igry-hero {
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
   overflow: hidden;
-  background: var(--igry-bg);
-  color: var(--igry-ink);
+  background: var(--paper);
+  color: var(--ink);
   isolation: isolate;
 }
 
@@ -38,56 +44,36 @@
   height: 100%;
   display: block;
   opacity: 0;
-  transition: opacity 1.8s ease 0.15s;
+  transition: opacity 1.8s var(--ease) 0.15s;
   z-index: 0;
 }
 
-/* hero.js adds .is-live after the first WebGL frame renders — the boot
+/* hero.js adds .is-live after the first canvas frame renders — the boot
  * loader (boot.js) fades the scene in on `igry:hero-ready`. */
 #igry-hero.is-live #hero-canvas {
   opacity: 1;
 }
 
-/* Content floats above the void; scroll scrub drives --hs (0→1). */
+/* Content floats above the washes; scroll scrub drives --hs (0→1). */
 #igry-hero .hero-content {
   position: relative;
   z-index: 2;
-  transform: translate3d(0, calc(var(--hs, 0) * 18vh), 0);
-  opacity: calc(1 - var(--hs, 0) * 0.85);
+  transform: translate3d(0, calc(var(--hs, 0) * 14vh), 0);
+  opacity: calc(1 - var(--hs, 0) * 0.9);
   will-change: transform, opacity;
 }
 
-#igry-hero .hero-vignette {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background:
-    radial-gradient(120% 90% at 50% 10%, transparent 40%, rgba(5, 5, 8, 0.55) 100%),
-    linear-gradient(to bottom, rgba(5, 5, 8, 0.25), transparent 30%, transparent 62%, var(--igry-bg) 100%);
-}
-
-/* Film grain — cheap, static, keeps the void from banding. */
-#igry-hero .hero-noise {
-  position: absolute;
-  inset: -50%;
-  z-index: 3;
-  pointer-events: none;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
 /* --------------------------------------------------------------------------
- * 2. CSS-gradient fallback (no WebGL / mobile / reduced motion)
+ * 2. Light fallback (no canvas / mobile / reduced motion)
  *    Applied by hero.js as .hero-fallback — same headline, never broken.
+ *    Washes stay ≤6% opacity: flat colour discipline.
  * -------------------------------------------------------------------------- */
 #igry-hero.hero-fallback {
   background:
-    radial-gradient(46% 38% at 22% 30%, rgba(168, 85, 247, 0.28), transparent 70%),
-    radial-gradient(40% 34% at 78% 24%, rgba(236, 72, 153, 0.22), transparent 70%),
-    radial-gradient(52% 42% at 58% 82%, rgba(34, 211, 238, 0.16), transparent 70%),
-    radial-gradient(90% 70% at 50% 50%, rgba(88, 40, 160, 0.12), transparent 75%),
-    var(--igry-bg);
+    radial-gradient(46% 38% at 22% 30%, rgba(180, 80, 46, 0.06), transparent 70%),
+    radial-gradient(40% 34% at 78% 24%, rgba(217, 164, 65, 0.05), transparent 70%),
+    radial-gradient(52% 42% at 58% 82%, rgba(147, 57, 31, 0.05), transparent 70%),
+    var(--paper);
 }
 
 #igry-hero.hero-fallback::before,
@@ -98,15 +84,15 @@
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(38% 30% at 30% 60%, rgba(168, 85, 247, 0.20), transparent 70%),
-    radial-gradient(30% 26% at 70% 40%, rgba(34, 211, 238, 0.14), transparent 70%);
-  animation: hero-drift 26s ease-in-out infinite alternate;
+    radial-gradient(38% 30% at 30% 60%, rgba(180, 80, 46, 0.05), transparent 70%),
+    radial-gradient(30% 26% at 70% 40%, rgba(217, 164, 65, 0.05), transparent 70%);
+  animation: hero-drift 26s var(--ease) infinite alternate;
 }
 
 #igry-hero.hero-fallback::after {
   background:
-    radial-gradient(34% 28% at 68% 68%, rgba(236, 72, 153, 0.18), transparent 70%),
-    radial-gradient(26% 22% at 28% 28%, rgba(168, 85, 247, 0.14), transparent 70%);
+    radial-gradient(34% 28% at 68% 68%, rgba(147, 57, 31, 0.05), transparent 70%),
+    radial-gradient(26% 22% at 28% 28%, rgba(180, 80, 46, 0.04), transparent 70%);
   animation-duration: 34s;
   animation-direction: alternate-reverse;
 }
@@ -117,101 +103,140 @@
 }
 
 /* --------------------------------------------------------------------------
- * 3. Hero typography (structural; HOME builder owns final page styles)
+ * 3. Hero typography — type-as-hero
  * -------------------------------------------------------------------------- */
 #igry-hero .hero-kicker {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--font-body);
   font-size: 0.72rem;
-  letter-spacing: 0.32em;
+  font-weight: 600;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--igry-cyan);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+#igry-hero .hero-kicker::before {
+  content: "";
+  width: 9px; height: 9px;
+  background: var(--accent);
+  transform: rotate(45deg);
+  flex: none;
 }
 
 #igry-hero .hero-title {
-  font-family: Oswald, "Archivo Narrow", "Arial Narrow", sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 0.94;
-  letter-spacing: 0.01em;
-  font-size: clamp(3rem, 11vw, 9.5rem);
-  margin: 0.35em 0 0.3em;
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: 0;
+  font-size: clamp(46px, 7.2vw, 112px);
+  margin: 0.4em 0 0.35em;
   text-wrap: balance;
 }
 
-#igry-hero .hero-title .neon {
-  color: transparent;
-  background: linear-gradient(100deg, var(--igry-purple), var(--igry-magenta) 55%, var(--igry-cyan));
-  -webkit-background-clip: text;
-  background-clip: text;
-  filter: drop-shadow(0 0 22px rgba(168, 85, 247, 0.45));
+#igry-hero .hero-title .accent {
+  font-style: italic;
+  color: var(--accent);
 }
 
 #igry-hero .hero-sub {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: clamp(0.8rem, 1.6vw, 0.95rem);
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.8vw, 1.125rem);
   line-height: 1.7;
-  color: var(--igry-dim);
-  max-width: 46ch;
+  color: var(--ink-soft);
+  max-width: 56ch;
 }
 
-/* Terminal intent menu */
+#igry-hero .hero-ctas {
+  margin-top: 2rem;
+}
+
+/* Intent menu — numbered editorial chapters */
 #igry-hero .hero-intent {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--font-body);
+  max-width: 640px;
 }
 
 #igry-hero .hero-intent-prompt {
   font-size: 0.72rem;
-  letter-spacing: 0.28em;
-  color: var(--igry-faint);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--muted);
   text-transform: uppercase;
-}
-
-#igry-hero .hero-intent-prompt::before {
-  content: "> ";
-  color: var(--igry-magenta);
+  margin-bottom: 0.4rem;
 }
 
 #igry-hero .hero-intent-list {
   list-style: none;
-  margin: 1rem 0 0;
+  margin: 0;
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
+}
+
+#igry-hero .hero-intent-list li {
+  border-top: 1px solid var(--line);
+}
+#igry-hero .hero-intent-list li:last-child {
+  border-bottom: 1px solid var(--line);
 }
 
 #igry-hero .hero-intent-list a {
-  display: inline-block;
-  padding: 0.55rem 1.1rem;
-  border: 1px solid rgba(168, 85, 247, 0.4);
-  border-radius: 999px;
-  color: var(--igry-ink);
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  display: grid;
+  grid-template-columns: 52px 1fr 28px;
+  align-items: baseline;
+  gap: 12px;
+  padding: 0.85rem 0.4rem;
+  color: var(--ink);
   text-decoration: none;
-  background: rgba(168, 85, 247, 0.06);
-  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  transition: background 0.3s var(--ease), padding-left 0.3s var(--ease);
 }
 
 #igry-hero .hero-intent-list a:hover {
-  border-color: var(--igry-cyan);
-  background: rgba(34, 211, 238, 0.08);
-  box-shadow: 0 0 24px rgba(34, 211, 238, 0.25);
+  background: var(--accent-wash);
+  padding-left: 0.9rem;
 }
 
-/* Scroll cue */
+#igry-hero .intent-no {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--accent);
+}
+
+#igry-hero .intent-name {
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: color 0.3s var(--ease);
+}
+#igry-hero .hero-intent-list a:hover .intent-name {
+  color: var(--accent-deep);
+}
+
+#igry-hero .intent-go {
+  font-size: 1.1rem;
+  color: var(--muted);
+  transform: translateX(0);
+  transition: transform 0.3s var(--ease), color 0.3s var(--ease);
+}
+#igry-hero .hero-intent-list a:hover .intent-go {
+  transform: translateX(6px);
+  color: var(--accent);
+}
+
+/* Scroll cue — quiet hairline */
 #igry-hero .hero-scrollcue {
   position: absolute;
   left: 50%;
   bottom: 2rem;
   z-index: 2;
   transform: translateX(-50%);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--font-body);
   font-size: 0.65rem;
+  font-weight: 600;
   letter-spacing: 0.4em;
   text-transform: uppercase;
-  color: var(--igry-faint);
+  color: var(--muted);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -222,63 +247,13 @@
   content: "";
   width: 1px;
   height: 3.2rem;
-  background: linear-gradient(to bottom, var(--igry-purple), transparent);
-  animation: cue-drop 2.2s ease-in-out infinite;
+  background: var(--accent);
+  animation: cue-drop 2.2s var(--ease) infinite;
 }
 
 @keyframes cue-drop {
   0%, 100% { transform: scaleY(0.4); opacity: 0.4; transform-origin: top; }
   50% { transform: scaleY(1); opacity: 1; transform-origin: top; }
-}
-
-/* --------------------------------------------------------------------------
- * 4. Glitch text — RGB-split layers + keyframe tear (hover / .glitching)
- * -------------------------------------------------------------------------- */
-.u-glitch {
-  position: relative;
-  display: inline-block;
-}
-
-.u-glitch::before,
-.u-glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  pointer-events: none;
-  white-space: inherit;
-}
-
-.u-glitch::before {
-  color: var(--igry-cyan);
-  z-index: -1;
-}
-
-.u-glitch::after {
-  color: var(--igry-magenta);
-  z-index: -2;
-}
-
-.u-glitch:hover::before,
-.u-glitch.glitching::before,
-.u-glitch:hover::after,
-.u-glitch.glitching::after {
-  opacity: 0.85;
-  animation: glitch-shift 0.45s steps(2, end) infinite;
-}
-
-.u-glitch:hover::after,
-.u-glitch.glitching::after {
-  animation-delay: 0.12s;
-  animation-direction: reverse;
-}
-
-@keyframes glitch-shift {
-  0%   { transform: translate(0); clip-path: inset(12% 0 74% 0); }
-  25%  { transform: translate(-3px, 2px); clip-path: inset(58% 0 8% 0); }
-  50%  { transform: translate(3px, -1px); clip-path: inset(28% 0 52% 0); }
-  75%  { transform: translate(-2px, -2px); clip-path: inset(80% 0 4% 0); }
-  100% { transform: translate(0); clip-path: inset(8% 0 82% 0); }
 }
 
 /* Masked line-reveal scaffolding (built by motion.js splitLinesReveal). */
@@ -300,7 +275,8 @@
 }
 
 /* --------------------------------------------------------------------------
- * 5. Custom cursor (cursor.js) — desktop, fine pointer, no reduced motion
+ * 4. Custom cursor (cursor.js) — desktop, fine pointer, no reduced motion.
+ *    Rethemed: ink dot + terracotta ring.
  * -------------------------------------------------------------------------- */
 .igry-cursor,
 .igry-cursor-ring {
@@ -310,7 +286,7 @@
   z-index: 9999;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.25s var(--ease);
   will-change: transform;
 }
 
@@ -318,21 +294,19 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #fff;
-  mix-blend-mode: difference;
+  background: var(--ink);
 }
 
 .igry-cursor-ring {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  mix-blend-mode: difference;
+  border: 1px solid var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.25s ease, width 0.3s ease, height 0.3s ease,
-              background-color 0.3s ease, border-color 0.3s ease;
+  transition: opacity 0.25s var(--ease), width 0.3s var(--ease), height 0.3s var(--ease),
+              background-color 0.3s var(--ease), border-color 0.3s var(--ease);
 }
 
 .igry-cursor.is-on,
@@ -345,13 +319,14 @@
 }
 
 .igry-cursor-label {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: var(--font-body);
   font-size: 0.58rem;
+  font-weight: 600;
   letter-spacing: 0.18em;
-  color: #050508;
+  color: var(--paper);
   opacity: 0;
   transform: scale(0.6);
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
   user-select: none;
 }
 
@@ -359,16 +334,15 @@
 .igry-cursor-ring.is-link {
   width: 64px;
   height: 64px;
-  border-color: #fff;
+  border-color: var(--accent-deep);
 }
 
-/* [data-cursor="view"] — morphs into a solid VIEW badge. */
+/* [data-cursor="view"] — morphs into a solid terracotta VIEW badge. */
 .igry-cursor-ring.is-view {
   width: 92px;
   height: 92px;
-  background: #fff;
-  border-color: #fff;
-  mix-blend-mode: normal;
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
 .igry-cursor-ring.is-view .igry-cursor-label {
@@ -410,7 +384,7 @@ html.has-cursor [data-magnetic] {
 }
 
 /* --------------------------------------------------------------------------
- * 6. Cross-document view transitions (progressive enhancement)
+ * 5. Cross-document view transitions (progressive enhancement)
  * -------------------------------------------------------------------------- */
 @view-transition {
   navigation: auto;
@@ -423,7 +397,7 @@ html.has-cursor [data-magnetic] {
 }
 
 /* --------------------------------------------------------------------------
- * 7. Reduced motion + small screens
+ * 6. Reduced motion + small screens
  * -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   #igry-hero.hero-fallback::before,
@@ -434,14 +408,6 @@ html.has-cursor [data-magnetic] {
 
   #hero-canvas {
     transition: none;
-  }
-
-  .u-glitch:hover::before,
-  .u-glitch.glitching::before,
-  .u-glitch:hover::after,
-  .u-glitch.glitching::after {
-    animation: none;
-    opacity: 0;
   }
 
   ::view-transition-old(root),
@@ -455,5 +421,8 @@ html.has-cursor [data-magnetic] {
     /* No scrub parallax on touch — keeps INP clean. */
     transform: none;
     opacity: 1;
+  }
+  #igry-hero .hero-title {
+    font-size: clamp(44px, 12.5vw, 72px);
   }
 }

@@ -20,24 +20,14 @@
   <meta name="twitter:title" content="IGRYbuilds — Premium Websites &amp; Automation, Rajasthan">
   <meta name="twitter:description" content="Premium websites + smart automation for local businesses. Founder-led, built by hand in Rajasthan, India.">
   <meta name="twitter:image" content="https://igrybuilds.pages.dev/assets/img/founder.webp">
-  <meta name="theme-color" content="#050508">
+  <meta name="theme-color" content="#FAF6EE">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/hero.css">
-
-  <!-- Importmap BEFORE any module script (hero.js lazy-imports three via these specifiers). -->
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.183.2/build/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.183.2/examples/jsm/"
-    }
-  }
-  </script>
 
   <!-- Vendor libs (pinned per SHARED-BRIEF) -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.2/gsap.min.js"></script>
@@ -48,7 +38,7 @@
        motion.js/cursor.js/hero.js self-initialise; boot.js fades the loader
        on `igry:hero-ready` (or its own safety timeout); site.js wires chrome. -->
   <script defer src="assets/js/motion.js"></script>
-  <script defer src="assets/js/hero.js" type="module"></script>
+  <script defer src="assets/js/hero.js"></script>
   <script defer src="assets/js/cursor.js"></script>
   <script defer src="assets/js/boot.js"></script>
   <script defer src="assets/js/site.js"></script>
@@ -148,17 +138,16 @@
   <main id="main">
 
     <!-- ============ 1. HERO ============ -->
-    <!-- Markup per HERO-INTEGRATION.md: hero.js wires Three.js into
-         #hero-canvas (created if absent), adds .is-live / .hero-fallback,
-         and dispatches `igry:hero-ready` — motion.js plays [data-hero-intro]
-         and boot.js fades the loader on that event. -->
+    <!-- Markup per HERO-INTEGRATION.md: hero.js paints slow terracotta/ochre
+         washes into #hero-canvas (created if absent), adds .is-live /
+         .hero-fallback, and dispatches `igry:hero-ready` — motion.js plays
+         [data-hero-intro] and boot.js fades the loader on that event. -->
     <section id="igry-hero" data-hero aria-label="Introduction">
       <canvas id="hero-canvas"></canvas>
-      <div class="hero-vignette"></div>
       <div class="hero-content">
         <p class="hero-kicker" data-hero-intro>Founder-led agency · Rajasthan, India</p>
         <h1 class="hero-title" data-hero-intro>
-          <span class="neon">Websites that win customers.</span><br>
+          Websites that <em class="accent">win customers.</em><br>
           Automation that never sleeps.
         </h1>
         <p class="hero-sub" data-hero-intro>Premium websites and smart automation that help local businesses
@@ -171,23 +160,22 @@
         <nav class="hero-intent" data-hero-intro aria-label="Find what you need">
           <p class="hero-intent-prompt">What are you looking for?</p>
           <ul class="hero-intent-list">
-            <li><a href="work.html?cat=websites">Websites</a></li>
-            <li><a href="work.html?cat=automation">Automation</a></li>
-            <li><a href="work.html?cat=chatbots">AI Chatbots</a></li>
-            <li><a href="work.html?cat=whatsapp">WhatsApp</a></li>
-            <li><a href="work.html?cat=seo">SEO</a></li>
+            <li><a href="work.html?cat=websites"><span class="intent-no" aria-hidden="true">01</span><span class="intent-name">Websites</span><span class="intent-go" aria-hidden="true">→</span></a></li>
+            <li><a href="work.html?cat=automation"><span class="intent-no" aria-hidden="true">02</span><span class="intent-name">Automation</span><span class="intent-go" aria-hidden="true">→</span></a></li>
+            <li><a href="work.html?cat=chatbots"><span class="intent-no" aria-hidden="true">03</span><span class="intent-name">AI Chatbots</span><span class="intent-go" aria-hidden="true">→</span></a></li>
+            <li><a href="work.html?cat=whatsapp"><span class="intent-no" aria-hidden="true">04</span><span class="intent-name">WhatsApp</span><span class="intent-go" aria-hidden="true">→</span></a></li>
+            <li><a href="work.html?cat=seo"><span class="intent-no" aria-hidden="true">05</span><span class="intent-name">SEO</span><span class="intent-go" aria-hidden="true">→</span></a></li>
           </ul>
         </nav>
       </div>
       <div class="hero-scrollcue">Scroll</div>
-      <div class="hero-noise"></div>
     </section>
 
     <!-- ============ 2. SERVICES ============ -->
     <section class="section services" id="services" aria-labelledby="services-h">
       <div class="wrap">
         <p class="eyebrow" data-reveal>What we do</p>
-        <h2 id="services-h" data-reveal>One studio. Every growth engine<br>a local business needs.</h2>
+        <h2 id="services-h" data-reveal>One studio. Every <em class="accent">growth engine</em><br>a local business needs.</h2>
 
         <div class="svc-grid">
           <article class="svc" data-reveal>
@@ -240,7 +228,7 @@
     <section class="section work" id="work" aria-labelledby="work-h">
       <div class="wrap">
         <p class="eyebrow" data-reveal>Selected work</p>
-        <h2 id="work-h" data-reveal>Twelve concepts.<br>One standard: premium.</h2>
+        <h2 id="work-h" data-reveal>Twelve concepts.<br>One standard: <em class="accent">premium.</em></h2>
         <p class="work-frame" data-reveal>Concept work &amp; studio experiments — honest work from the studio, never fake client claims.</p>
 
         <div class="panel-grid">
@@ -398,7 +386,7 @@
     <section class="section why" id="why" aria-labelledby="why-h">
       <div class="wrap">
         <p class="eyebrow" data-reveal>Why IGRYbuilds</p>
-        <h2 id="why-h" data-reveal>Built like an owner,<br>because it is one.</h2>
+        <h2 id="why-h" data-reveal>Built like an <em class="accent">owner,</em><br>because it is one.</h2>
 
         <div class="why-grid">
           <article class="why-card" data-reveal>
@@ -444,7 +432,7 @@
     <section class="section cta" id="contact" aria-labelledby="cta-h">
       <div class="wrap cta-box" data-reveal>
         <p class="eyebrow">Let&rsquo;s talk</p>
-        <h2 id="cta-h">Tell me what you need.<br>I&rsquo;ll tell you honestly what it&rsquo;ll take.</h2>
+        <h2 id="cta-h">Tell me what you need.<br>I&rsquo;ll tell you <em class="accent">honestly</em> what it&rsquo;ll take.</h2>
         <p class="cta-sub">Free 20-minute consultation. No pitch, no pressure — and a reply within 24 hours.</p>
         <div class="cta-row">
           <a class="btn btn-hot btn-lg" href="contact.html">Start a project <span aria-hidden="true">→</span></a>

@@ -11,7 +11,7 @@
      (no window.IGRY.motion): site.js adds `reveal-css` to <html>, which
      is the sole gate for the hidden states in base.css. This keeps CSS
      transitions from fighting GSAP's per-frame inline styles.
-   - `#hero-canvas` is owned by hero.js (Three.js). site.js does not touch it.
+   - `#hero-canvas` is owned by hero.js (light 2D canvas). site.js does not touch it.
    - Everything here degrades gracefully when libs are absent.
    ============================================================ */
 (function () {
