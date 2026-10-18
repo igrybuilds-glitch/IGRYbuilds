@@ -3,193 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Work — 1,000 Concept Projects | IGRYbuilds</title>
-<meta name="description" content="Browse 1,000 concept projects from the IGRYbuilds studio — concept work and studio experiments across 24 business categories. Filter and search.">
+<title>Work — IGRYbuilds</title>
+<meta name="description" content="Selected work from IGRYbuilds: real client projects and honest studio concept experiments. No fake client claims.">
 <link rel="canonical" href="https://igrybuilds.pages.dev/work.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="IGRYbuilds">
 <meta property="og:locale" content="en_GB">
-<meta property="og:title" content="Work — 1,000 Concept Projects | IGRYbuilds">
-<meta property="og:description" content="1,000 concept projects from the IGRYbuilds studio — concept work &amp; studio experiments across 24 business categories.">
+<meta property="og:title" content="Work — IGRYbuilds">
+<meta property="og:description" content="Selected work from IGRYbuilds: real client projects and honest studio concept experiments. No fake client claims.">
 <meta property="og:url" content="https://igrybuilds.pages.dev/work.html">
 <meta property="og:image" content="https://igrybuilds.pages.dev/assets/img/founder.webp">
-<meta property="og:image:width" content="720">
-<meta property="og:image:height" content="1280">
-<meta property="og:image:alt" content="Manmohan Sharma, founder of IGRYbuilds">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Work — 1,000 Concept Projects | IGRYbuilds">
-<meta name="twitter:description" content="1,000 concept projects from the IGRYbuilds studio — concept work &amp; studio experiments across 24 business categories.">
+<meta name="twitter:title" content="Work — IGRYbuilds">
+<meta name="twitter:description" content="Selected work from IGRYbuilds: real client projects and honest studio concept experiments. No fake client claims.">
+<meta name="twitter:image" content="https://igrybuilds.pages.dev/assets/img/founder.webp">
+<meta name="theme-color" content="#141110">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<meta name="theme-color" content="#FAF6EE">
-<link rel="stylesheet" href="assets/css/work.css">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "IGRYbuilds",
-  "url": "https://igrybuilds.pages.dev/",
-  "logo": "https://igrybuilds.pages.dev/assets/img/founder.webp",
-  "foundingDate": "2026-03",
-  "description": "Premium websites and smart automation for local businesses, built by hand in Rajasthan, India.",
-  "founder": { "@type": "Person", "name": "Manmohan Sharma" },
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Ratangarh",
-    "addressRegion": "Rajasthan",
-    "postalCode": "331802",
-    "addressCountry": "IN"
-  },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+91-7014257991",
-    "email": "igrybuilds@gmail.com",
-    "contactType": "sales"
-  }
-}
+<link rel="stylesheet" href="assets/css/3d.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.2/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.2/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.183.2/build/three.module.js"}}
 </script>
+<script type="module" src="assets/js/scroll3d.js"></script>
+<script src="assets/js/site3d.js" defer></script>
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "IGRYbuilds",
-  "url": "https://igrybuilds.pages.dev/"
-}
+{"@context":"https://schema.org","@type":"Organization","name":"IGRYbuilds","url":"https://igrybuilds.pages.dev/",
+"foundingDate":"2026-03","description":"Premium websites and smart automation for local businesses, built by hand in Rajasthan, India.",
+"founder":{"@type":"Person","name":"Manmohan Sharma"},
+"address":{"@type":"PostalAddress","addressLocality":"Ratangarh","addressRegion":"Rajasthan","postalCode":"331802","addressCountry":"IN"},
+"contactPoint":{"@type":"ContactPoint","telephone":"+91-7014257991","email":"igrybuilds@gmail.com","contactType":"sales"}}
 </script>
+
 </head>
 <body>
-<a class="skip-link" href="#grid">Skip to projects</a>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<!-- SHARED NAV (identical on every page) -->
 <header class="site-nav" id="siteNav">
-  <a class="wordmark" href="index.html" aria-label="IGRYbuilds — home">IGRY<span>builds</span></a>
-  <nav class="nav-pills" aria-label="Primary">
-    <a class="pill" href="work.html" aria-current="page">Work</a>
-    <a class="pill pill-hot" href="contact.html">Contact</a>
-  </nav>
-  <button class="nav-burger" id="navBurger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
-    <span></span><span></span><span></span>
-  </button>
+<a class="wordmark" href="index.html" aria-label="IGRYbuilds — home">IGRY<span>builds</span></a>
+<nav class="nav-links" aria-label="Primary"><a href="services.html" class="">Services</a><a href="work.html" class="">Work</a><a href="process.html" class="">Process</a><a href="pricing.html" class="">Pricing</a><a href="about.html" class="">About</a></nav>
+<button class="nav-burger" id="navBurger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+<span></span><span></span><span></span></button>
 </header>
-
 <div class="mobile-menu" id="mobileMenu" hidden>
-  <nav aria-label="Mobile">
-    <a href="work.html" aria-current="page">Work</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="about.html">About</a>
-    <a href="contact.html" class="mm-hot">Contact</a>
-  </nav>
-  <p class="mm-label">What are you looking for?</p>
-  <nav aria-label="Mobile services">
-    <a href="work.html?cat=websites">Websites</a>
-    <a href="work.html?cat=automation">Automation</a>
-    <a href="work.html?cat=chatbots">AI Chatbots</a>
-    <a href="work.html?cat=whatsapp">WhatsApp</a>
-    <a href="work.html?cat=seo">SEO</a>
-  </nav>
+<nav aria-label="Mobile">
+<a href="index.html">Home</a>
+<a href="services.html">Services</a>
+<a href="work.html">Work</a>
+<a href="process.html">Process</a>
+<a href="pricing.html">Pricing</a>
+<a href="about.html">About</a>
+<a href="contact.html" class="hot">Contact</a>
+</nav>
+<p class="eyebrow" style="margin-top:1.6rem">Services</p>
+<nav aria-label="Mobile services"><a href="services/websites.html">Premium Websites</a><a href="services/redesign.html">Redesign & CRO</a><a href="services/seo.html">Local SEO</a><a href="services/automation.html">Automation</a><a href="services/chatbots.html">AI Chatbots</a><a href="services/whatsapp.html">WhatsApp Systems</a></nav>
 </div>
+<main id="main">
+<section class="page-hero stage3d" data-3d-hero="orb">
+<canvas class="webgl" aria-hidden="true"></canvas>
+<div class="stage-fallback" aria-hidden="true"><div class="rings"><i></i><i></i><i></i><i></i></div></div>
+<div class="wrap"><div class="hero-copy">
+<p class="crumb"><a href="index.html">Home</a> / Work</p>
+<p class="eyebrow">Selected work</p>
+<h1>Real work. Honest <em class="accent">experiments.</em></h1>
+<p class="lede">Client work and studio concepts, clearly labelled. Never fake client claims — what you see is what was actually built or designed in this studio.</p>
+</div></div>
+</section>
+<section class="section"><div class="wrap"><div class="work-grid"><a class="work-card" data-reveal href="work/design-plus.html">
+<div class="work-visual"><span class="glyph">DP</span></div>
+<div class="work-body"><span class="chip">Client work</span><h3>Design Plus — Architect Studio</h3><p>Website + local SEO for an architect studio in Ajmer, Rajasthan.</p></div></a><a class="work-card" data-reveal href="work.html">
+<div class="work-visual"><span class="glyph">MV</span></div>
+<div class="work-body"><span class="chip">Concept</span><h3>Monsoon Villa Stays</h3><p>A booking site concept that sells the stay before the scroll ends.</p></div></a><a class="work-card" data-reveal href="work.html">
+<div class="work-visual"><span class="glyph">PA</span></div>
+<div class="work-body"><span class="chip">Concept</span><h3>PipeAuto</h3><p>Lead follow-up automation concept — every lead answered in 60 seconds.</p></div></a><a class="work-card" data-reveal href="work.html">
+<div class="work-visual"><span class="glyph">CA</span></div>
+<div class="work-body"><span class="chip">Concept</span><h3>Concierge AI</h3><p>Hotel chatbot concept — guest questions answered before the front desk.</p></div></a><a class="work-card" data-reveal href="work.html">
+<div class="work-visual"><span class="glyph">CW</span></div>
+<div class="work-body"><span class="chip">Concept</span><h3>CartSaver WA</h3><p>WhatsApp automation concept — abandoned carts nudged in seconds.</p></div></a><a class="work-card" data-reveal href="work.html">
+<div class="work-visual"><span class="glyph">RM</span></div>
+<div class="work-body"><span class="chip">Concept</span><h3>RankMap Local</h3><p>Local SEO concept — found on Google when it matters.</p></div></a></div></div></section>
 
-<header class="work-hero">
-  <p class="kicker">Portfolio</p>
-  <h1><span class="n">1,000</span> concepts.<span class="thin">Concept work &amp; studio experiments</span></h1>
-  <p class="lede">Every piece below is <strong>concept work or a studio experiment</strong> — design studies built in the IGRYbuilds studio to explore what a premium website could look like for each kind of business. They are not client projects, and we never claim otherwise. Filter by the 24 categories, search, or open any card to inspect the layout, palette and concept.</p>
-  <ul class="hero-stats" aria-label="Portfolio at a glance">
-    <li><b>1,000</b>concepts</li>
-    <li><b>24</b>categories</li>
-    <li><b>24</b>layouts</li>
-    <li><b>12</b>palettes</li>
-  </ul>
+<section class="section"><div class="wrap">
+<div class="cta-band" data-reveal>
+<h2>Tell me what you need.<br>I'll tell you <em class='accent'>honestly</em> what it'll take.</h2>
+<p class="lede" style="margin:0 auto 2rem">Free 20-minute consultation. No pitch, no pressure — reply within 24 hours.</p>
+<div class="cta-row">
+<a class="btn btn-hot btn-lg" href="contact.html">Start a project <span aria-hidden="true">→</span></a>
+<a class="btn btn-wa btn-lg" href="https://wa.me/917014257991" target="_blank" rel="noopener">WhatsApp me</a>
+</div>
+</div>
+</div></section>
 
-  <div class="controls">
-    <div class="search-row">
-      <div class="search-wrap">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-        <input id="search" type="search" placeholder="Search 1,000 concepts — try &quot;bakery&quot;, &quot;booking&quot;, &quot;wedding&quot;&hellip;" aria-label="Search projects" autocomplete="off">
-        <button class="clear-search" id="clearSearch" aria-label="Clear search" hidden>&times;</button>
-      </div>
-      <span class="sort-note">24 batches &middot; studio order</span>
-    </div>
-    <div class="chips" id="chips" role="group" aria-label="Filter by category">
-      <noscript><p style="color:var(--muted);font-size:.8rem">Filtering needs JavaScript — the first 24 concepts are shown below.</p></noscript>
-    </div>
-    <p class="count-line" id="countLine" aria-live="polite">Showing <b>24</b> of <b>1000</b> &mdash; all categories</p>
-  </div>
-</header>
-
-<main class="work-main">
-  <div class="grid" id="grid">
-<article class="card will-in" data-id="p0001" tabindex="0" role="button" aria-label="Ember &amp; Oak, Restaurants concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-4 arch-3" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="li"></div><div class="li"></div><div class="li"></div><div class="li"></div><div class="btn"></div></div></div><div class="card-meta"><span class="card-cat">Restaurants</span><h3>Ember &amp; Oak</h3><p>Fire-led kitchen concept with a live menu board and table booking.</p></div></article>
-<article class="card will-in" data-id="p0002" tabindex="0" role="button" aria-label="The Copper Thali, Restaurants concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-0 arch-3" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="li"></div><div class="li"></div><div class="li"></div><div class="li"></div><div class="btn"></div></div></div><div class="card-meta"><span class="card-cat">Restaurants</span><h3>The Copper Thali</h3><p>Heritage dining concept built as a tasting-menu journey.</p></div></article>
-<article class="card will-in" data-id="p0003" tabindex="0" role="button" aria-label="Saffron Route, Restaurants concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-7 arch-3" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="li"></div><div class="li"></div><div class="li"></div><div class="li"></div><div class="btn"></div></div></div><div class="card-meta"><span class="card-cat">Restaurants</span><h3>Saffron Route</h3><p>Cloud-kitchen concept built around regional thalis.</p></div></article>
-<article class="card will-in" data-id="p0004" tabindex="0" role="button" aria-label="Midnight Momo, Restaurants concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-2 arch-3" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="li"></div><div class="li"></div><div class="li"></div><div class="li"></div><div class="btn"></div></div></div><div class="card-meta"><span class="card-cat">Restaurants</span><h3>Midnight Momo</h3><p>Late-night street-food brand with a pre-order counter.</p></div></article>
-<article class="card will-in" data-id="p0005" tabindex="0" role="button" aria-label="Leaf &amp; Ladle, Restaurants concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-10 arch-3" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="li"></div><div class="li"></div><div class="li"></div><div class="li"></div><div class="btn"></div></div></div><div class="card-meta"><span class="card-cat">Restaurants</span><h3>Leaf &amp; Ladle</h3><p>Plant-forward cafe concept with seasonal menus.</p></div></article>
-<article class="card will-in" data-id="p0006" tabindex="0" role="button" aria-label="Tandoor Tales, Restaurants concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-1 arch-3" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="li"></div><div class="li"></div><div class="li"></div><div class="li"></div><div class="btn"></div></div></div><div class="card-meta"><span class="card-cat">Restaurants</span><h3>Tandoor Tales</h3><p>Story-led dining concept for a highway dhaba.</p></div></article>
-<article class="card will-in" data-id="p0007" tabindex="0" role="button" aria-label="The Brass Plate, Restaurants concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-7 arch-3" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="li"></div><div class="li"></div><div class="li"></div><div class="li"></div><div class="btn"></div></div></div><div class="card-meta"><span class="card-cat">Restaurants</span><h3>The Brass Plate</h3><p>Fine-dine concept with chef&#39;s-table reservations.</p></div></article>
-<article class="card will-in" data-id="p0008" tabindex="0" role="button" aria-label="Chai Chowki, Restaurants concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-8 arch-3" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="li"></div><div class="li"></div><div class="li"></div><div class="li"></div><div class="btn"></div></div></div><div class="card-meta"><span class="card-cat">Restaurants</span><h3>Chai Chowki</h3><p>Chai-bar concept with a loyalty-first ordering flow.</p></div></article>
-<article class="card will-in" data-id="p0009" tabindex="0" role="button" aria-label="ClearPath Dental, Clinics concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-8 arch-4" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="r3"><div class="crd"><div class="ln"></div><div class="ln short"></div></div><div class="crd hi"><div class="ln"></div><div class="ln short d2"></div></div><div class="crd"><div class="ln"></div><div class="ln short"></div></div></div></div></div><div class="card-meta"><span class="card-cat">Clinics</span><h3>ClearPath Dental</h3><p>Calm, trust-first clinic site with online appointments.</p></div></article>
-<article class="card will-in" data-id="p0010" tabindex="0" role="button" aria-label="Aarogya Family Care, Clinics concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-8 arch-4" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="r3"><div class="crd"><div class="ln"></div><div class="ln short"></div></div><div class="crd hi"><div class="ln"></div><div class="ln short d2"></div></div><div class="crd"><div class="ln"></div><div class="ln short"></div></div></div></div></div><div class="card-meta"><span class="card-cat">Clinics</span><h3>Aarogya Family Care</h3><p>Multi-speciality clinic concept with doctor profiles.</p></div></article>
-<article class="card will-in" data-id="p0011" tabindex="0" role="button" aria-label="Pulse Physio, Clinics concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-8 arch-4" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="r3"><div class="crd"><div class="ln"></div><div class="ln short"></div></div><div class="crd hi"><div class="ln"></div><div class="ln short d2"></div></div><div class="crd"><div class="ln"></div><div class="ln short"></div></div></div></div></div><div class="card-meta"><span class="card-cat">Clinics</span><h3>Pulse Physio</h3><p>Sports physio studio with recovery-programme booking.</p></div></article>
-<article class="card will-in" data-id="p0012" tabindex="0" role="button" aria-label="VisionKart Eye Care, Clinics concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-8 arch-4" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="r3"><div class="crd"><div class="ln"></div><div class="ln short"></div></div><div class="crd hi"><div class="ln"></div><div class="ln short d2"></div></div><div class="crd"><div class="ln"></div><div class="ln short"></div></div></div></div></div><div class="card-meta"><span class="card-cat">Clinics</span><h3>VisionKart Eye Care</h3><p>Eye-clinic concept with test booking and a frames catalogue.</p></div></article>
-<article class="card will-in" data-id="p0013" tabindex="0" role="button" aria-label="DermaLume Skin, Clinics concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-5 arch-4" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="r3"><div class="crd"><div class="ln"></div><div class="ln short"></div></div><div class="crd hi"><div class="ln"></div><div class="ln short d2"></div></div><div class="crd"><div class="ln"></div><div class="ln short"></div></div></div></div></div><div class="card-meta"><span class="card-cat">Clinics</span><h3>DermaLume Skin</h3><p>Dermatology concept with plain-English treatment explainers.</p></div></article>
-<article class="card will-in" data-id="p0014" tabindex="0" role="button" aria-label="TinySteps Paediatrics, Clinics concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-9 arch-4" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="r3"><div class="crd"><div class="ln"></div><div class="ln short"></div></div><div class="crd hi"><div class="ln"></div><div class="ln short d2"></div></div><div class="crd"><div class="ln"></div><div class="ln short"></div></div></div></div></div><div class="card-meta"><span class="card-cat">Clinics</span><h3>TinySteps Paediatrics</h3><p>Child-friendly clinic site with a vaccination tracker.</p></div></article>
-<article class="card will-in" data-id="p0015" tabindex="0" role="button" aria-label="SpineAlign Chiro, Clinics concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-2 arch-4" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="r3"><div class="crd"><div class="ln"></div><div class="ln short"></div></div><div class="crd hi"><div class="ln"></div><div class="ln short d2"></div></div><div class="crd"><div class="ln"></div><div class="ln short"></div></div></div></div></div><div class="card-meta"><span class="card-cat">Clinics</span><h3>SpineAlign Chiro</h3><p>Chiropractic concept with a posture-assessment funnel.</p></div></article>
-<article class="card will-in" data-id="p0016" tabindex="0" role="button" aria-label="MediNest Homecare, Clinics concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-7 arch-4" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="r3"><div class="crd"><div class="ln"></div><div class="ln short"></div></div><div class="crd hi"><div class="ln"></div><div class="ln short d2"></div></div><div class="crd"><div class="ln"></div><div class="ln short"></div></div></div></div></div><div class="card-meta"><span class="card-cat">Clinics</span><h3>MediNest Homecare</h3><p>Home-healthcare concept with a nurse booking flow.</p></div></article>
-<article class="card will-in" data-id="p0017" tabindex="0" role="button" aria-label="Studio Terra Firma, Architects concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-8 arch-7" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="grd2"><div class="cell hi"></div><div class="cell"></div><div class="cell"></div><div class="cell hi"></div></div><div class="ln short"></div></div></div><div class="card-meta"><span class="card-cat">Architects</span><h3>Studio Terra Firma</h3><p>Portfolio concept for a context-first architecture studio.</p></div></article>
-<article class="card will-in" data-id="p0018" tabindex="0" role="button" aria-label="Line &amp; Light, Architects concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-6 arch-7" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="grd2"><div class="cell hi"></div><div class="cell"></div><div class="cell"></div><div class="cell hi"></div></div><div class="ln short"></div></div></div><div class="card-meta"><span class="card-cat">Architects</span><h3>Line &amp; Light</h3><p>Minimalist practice site with deep project case studies.</p></div></article>
-<article class="card will-in" data-id="p0019" tabindex="0" role="button" aria-label="Brickworks Atelier, Architects concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-8 arch-7" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="grd2"><div class="cell hi"></div><div class="cell"></div><div class="cell"></div><div class="cell hi"></div></div><div class="ln short"></div></div></div><div class="card-meta"><span class="card-cat">Architects</span><h3>Brickworks Atelier</h3><p>Material-obsessed studio with a process journal.</p></div></article>
-<article class="card will-in" data-id="p0020" tabindex="0" role="button" aria-label="Northline Architects, Architects concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-9 arch-7" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="grd2"><div class="cell hi"></div><div class="cell"></div><div class="cell"></div><div class="cell hi"></div></div><div class="ln short"></div></div></div><div class="card-meta"><span class="card-cat">Architects</span><h3>Northline Architects</h3><p>Commercial practice concept with tender-ready pages.</p></div></article>
-<article class="card will-in" data-id="p0021" tabindex="0" role="button" aria-label="Courtyard Studio, Architects concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-1 arch-7" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="grd2"><div class="cell hi"></div><div class="cell"></div><div class="cell"></div><div class="cell hi"></div></div><div class="ln short"></div></div></div><div class="card-meta"><span class="card-cat">Architects</span><h3>Courtyard Studio</h3><p>Vernacular design practice with climate-smart showcases.</p></div></article>
-<article class="card will-in" data-id="p0022" tabindex="0" role="button" aria-label="Monolith &amp; Moss, Architects concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-2 arch-7" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="grd2"><div class="cell hi"></div><div class="cell"></div><div class="cell"></div><div class="cell hi"></div></div><div class="ln short"></div></div></div><div class="card-meta"><span class="card-cat">Architects</span><h3>Monolith &amp; Moss</h3><p>Landscape-integrated architecture portfolio concept.</p></div></article>
-<article class="card will-in" data-id="p0023" tabindex="0" role="button" aria-label="Gridhouse Collective, Architects concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-11 arch-7" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="grd2"><div class="cell hi"></div><div class="cell"></div><div class="cell"></div><div class="cell hi"></div></div><div class="ln short"></div></div></div><div class="card-meta"><span class="card-cat">Architects</span><h3>Gridhouse Collective</h3><p>Young practice concept built on competition entries.</p></div></article>
-<article class="card will-in" data-id="p0024" tabindex="0" role="button" aria-label="The Drafting Room, Architects concept"><span class="card-kind flag">Flagship</span><div class="thumb pal-2 arch-7" aria-hidden="true"><div class="chrome"><i></i><i></i><i></i><u></u></div><div class="mock"><div class="nv"></div><div class="grd2"><div class="cell hi"></div><div class="cell"></div><div class="cell"></div><div class="cell hi"></div></div><div class="ln short"></div></div></div><div class="card-meta"><span class="card-cat">Architects</span><h3>The Drafting Room</h3><p>Boutique studio site with a client-onboarding flow.</p></div></article>
-  </div>
-
-  <div class="empty" id="empty" hidden>
-    <h2>No concepts found</h2>
-    <p>Nothing matches that combination. Try a different search or category.</p>
-    <button id="resetFilters">Reset filters</button>
-  </div>
-
-  <div class="load-row">
-    <button id="loadMore">Load more</button>
-  </div>
 </main>
-
-<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal" id="modalBox"></div>
-</div>
-
-<!-- SHARED FOOTER (identical on every page) -->
 <footer class="site-footer">
-  <div class="wrap">
-    <p class="foot-sign">— Manmohan, founder of IGRYbuilds</p>
-    <p class="foot-cta"><a class="text-link" href="contact.html">Have a project in mind? Let&rsquo;s talk <span aria-hidden="true">→</span></a></p>
-    <div class="foot-grid">
-      <nav class="foot-nav" aria-label="Footer">
-        <a href="work.html" aria-current="page">Work</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-      <p class="foot-contact">
-        <a href="tel:+917014257991">+91 70142 57991</a><br>
-        <a href="mailto:igrybuilds@gmail.com">igrybuilds@gmail.com</a>
-      </p>
-    </div>
-    <p class="foot-made">Built by hand in Rajasthan, India. <span class="foot-year">© <span id="year">2026</span> IGRYbuilds.</span></p>
-  </div>
+<div class="wrap">
+<p class="foot-sign" data-reveal>— Manmohan Sharma, founder of IGRYbuilds</p>
+<p class="foot-cta" data-reveal><a class="text-link" href="contact.html">Have a project in mind? Let's talk <span aria-hidden="true">→</span></a></p>
+<div class="foot-grid">
+<nav class="foot-nav" aria-label="Footer">
+<a href="services.html">Services</a><a href="work.html">Work</a><a href="process.html">Process</a>
+<a href="pricing.html">Pricing</a><a href="about.html">About</a><a href="blog.html">Blog</a>
+<a href="contact.html">Contact</a>
+</nav>
+<p class="foot-contact">
+<a href="tel:+917014257991">+91 70142 57991</a><br>
+<a href="mailto:igrybuilds@gmail.com">igrybuilds@gmail.com</a>
+</p>
+</div>
+<p class="foot-made">Built by hand in Rajasthan, India. <span>© <span id="year">2026</span> IGRYbuilds.</span></p>
+</div>
 </footer>
-
-<!-- FLOATING WHATSAPP (all pages) -->
-<a class="wa-float" href="https://wa.me/917014257991" target="_blank" rel="noopener"
-   aria-label="Chat with IGRYbuilds on WhatsApp">
-  <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-    <path fill="currentColor" d="M16 3C9.4 3 4 8.4 4 15c0 2.4.7 4.6 2 6.5L4 29l7.7-2c1.8 1 3.9 1.5 4.3 1.5 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.4 0-2.8-.4-4-1.1l-.3-.2-4.6 1.2 1.2-4.5-.2-.3c-.8-1.2-1.2-2.7-1.2-4.1 0-5 4-9 9-9s9 4 9 9-4 8.9-9 9zm5-6.7c-.3-.1-1.6-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-1 1.1-.2.2-.3.3-.7.1-.3-.1-1.4-.5-2.6-1.6-.9-.8-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.8-2c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9 1 1.9 2.8 3.9 5.5 5.2 1.9.9 2.7 1 3.6.8.6-.1 1.6-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.4z"/>
-  </svg>
+<a class="wa-float" href="https://wa.me/917014257991" target="_blank" rel="noopener" aria-label="Chat with IGRYbuilds on WhatsApp">
+<svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16 3C9.4 3 4 8.4 4 15c0 2.4.7 4.6 2 6.5L4 29l7.7-2c1.8 1 3.9 1.5 4.3 1.5 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.4 0-2.8-.4-4-1.1l-.3-.2-4.6 1.2 1.2-4.5-.2-.3c-.8-1.2-1.2-2.7-1.2-4.1 0-5 4-9 9-9s9 4 9 9-4 8.9-9 9zm5-6.7c-.3-.1-1.6-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-1 1.1-.2.2-.3.3-.7.1-.3-.1-1.4-.5-2.6-1.6-.9-.8-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.8-2c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9 1 1.9 2.8 3.9 5.5 5.2 1.9.9 2.7 1 3.6.8.6-.1 1.6-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.4z"/></svg>
 </a>
-
-<script src="assets/js/site.js" defer></script>
-<script src="assets/js/work.js" defer></script>
+<script>document.documentElement.classList.add('js');</script>
 </body>
 </html>
