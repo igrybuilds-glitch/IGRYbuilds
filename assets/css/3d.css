@@ -257,6 +257,8 @@ em.accent{font-style:italic;color:var(--accent-soft)}
 .foot-contact a:hover{color:var(--accent-soft)}
 .foot-made{color:var(--faint);font-size:.86rem;border-top:1px solid var(--line-soft);padding-top:1.6rem}
 
+.foot-cities{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--line-soft)}
+.foot-label{color:var(--faint);font-size:.82rem;text-transform:uppercase;letter-spacing:.1em;margin-right:2px}
 /* ---------- whatsapp float ---------- */
 .wa-float{position:fixed;right:22px;bottom:22px;z-index:110;width:58px;height:58px;border-radius:50%;
   background:#1f7a4d;color:#fff;display:flex;align-items:center;justify-content:center;
