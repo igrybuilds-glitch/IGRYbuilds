@@ -1,8 +1,12 @@
 /* IGRYbuilds 3D engine — three.js scroll-driven scenes.
-   ES module: import three via the page importmap BEFORE this script.
+   ES module. three.js is imported LAZILY (dynamic import via the page
+   importmap) and only after every gate passes: a 3D canvas exists on the
+   page, WebGL is available, the viewport is desktop width with a fine
+   pointer, and the user has not asked for reduced motion. Pages without
+   3D markup never download three.js at all.
    Robust by design: no WebGL / mobile / reduced-motion all degrade to a
    flat CSS fallback (.no-webgl on <html>). Never throws when CDNs fail. */
-import * as THREE from 'three';
+let THREE = null;
 (function () {
   'use strict';
   var ACCENT = 0xc85a2e, CREAM = 0xf3ede0, DARK = 0x2a211b, WARM = 0xffd9b0;
@@ -326,14 +330,19 @@ import * as THREE from 'three';
     requestAnimationFrame(frame);
   }
 
-  /* three.js comes from the importmap module script; boot when ready */
+  /* Boot: every gate runs BEFORE three.js is imported, so a page that
+     cannot or should not render 3D never pays the download. */
   function boot() {
-    var needThree = document.querySelector('[data-3d-hero]') || document.getElementById('journey');
-    if (!needThree) return;
-    if (!webglOK() || smallScreen()) markFallback();
-    try {
-      if (document.getElementById('journey')) initJourney(); else initHeroObject();
-    } catch (e) { markFallback(); }
+    var hasCanvas = document.querySelector('[data-3d-hero] canvas.webgl') ||
+      document.querySelector('#journey canvas.webgl');
+    if (!hasCanvas) return;
+    if (!webglOK() || smallScreen() || reducedMotion()) { markFallback(); return; }
+    import('three').then(function (mod) {
+      THREE = mod;
+      try {
+        if (document.getElementById('journey')) initJourney(); else initHeroObject();
+      } catch (e) { markFallback(); }
+    }).catch(function () { markFallback(); });
   }
   boot();
 })();
