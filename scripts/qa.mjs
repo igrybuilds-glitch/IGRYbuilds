@@ -11,6 +11,8 @@
      - <title> present and non-empty
      - meta description present and non-empty
      - canonical link present
+     - share card image: og:image + twitter:image present and equal,
+       target asset exists locally, og:image width/height + both alts present
      - exactly one <h1>
      - every JSON-LD block parses as valid JSON (and at least one exists)
      - every <img> carries an alt attribute
@@ -95,6 +97,26 @@ for (const rel of pages) {
   check(rel, 'meta-description', !!descVal && descVal[1].trim().length > 0);
 
   check(rel, 'canonical', /<link\b[^>]*rel\s*=\s*"canonical"/i.test(body));
+
+  const ogImg = metaTags.find((t) => /property\s*=\s*"og:image"/i.test(t));
+  const ogImgVal = ogImg && ogImg.match(/content\s*=\s*"([^"]*)"/i);
+  const twImg = metaTags.find((t) => /name\s*=\s*"twitter:image"/i.test(t));
+  const twImgVal = twImg && twImg.match(/content\s*=\s*"([^"]*)"/i);
+  let shareOk = !!(ogImgVal && twImgVal && ogImgVal[1] === twImgVal[1]);
+  let shareDetail = '';
+  if (shareOk) {
+    const u = ogImgVal[1];
+    const local = u.startsWith('https://igrybuilds.pages.dev') ? u.slice('https://igrybuilds.pages.dev'.length)
+      : (u.startsWith('/') ? u : null);
+    if (!local || !fs.existsSync(path.join(ROOT, local))) {
+      shareOk = false; shareDetail = 'og:image target missing locally: ' + u;
+    } else {
+      const hasWH = /property\s*=\s*"og:image:width"/i.test(body) && /property\s*=\s*"og:image:height"/i.test(body);
+      const hasAlt = /property\s*=\s*"og:image:alt"/i.test(body) && /name\s*=\s*"twitter:image:alt"/i.test(body);
+      if (!hasWH || !hasAlt) { shareOk = false; shareDetail = 'missing og:image dims or image alt tags'; }
+    }
+  } else shareDetail = 'og:image/twitter:image missing or mismatched';
+  check(rel, 'share-image', shareOk, shareDetail);
 
   const h1s = (body.match(/<h1\b/gi) || []).length;
   check(rel, 'single-h1', h1s === 1, `found ${h1s}`);
