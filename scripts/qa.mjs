@@ -10,7 +10,8 @@
      - HTTP 200 when served locally
      - <title> present and non-empty
      - meta description present and non-empty
-     - canonical link present
+     - canonical link present — EXCEPT 404.html, which must NOT carry one
+       (a 404 canonical is incorrect practice; 404.html also needs robots noindex)
      - share card image: og:image + twitter:image present and equal,
        target asset exists locally, og:image width/height + both alts present
      - exactly one <h1>
@@ -96,7 +97,18 @@ for (const rel of pages) {
   const descVal = desc && desc.match(/content\s*=\s*"([^"]*)"/i);
   check(rel, 'meta-description', !!descVal && descVal[1].trim().length > 0);
 
-  check(rel, 'canonical', /<link\b[^>]*rel\s*=\s*"canonical"/i.test(body));
+  const hasCanonical = /<link\b[^>]*rel\s*=\s*"canonical"/i.test(body);
+  if (rel === '404.html')
+    check(rel, 'no-canonical-on-404', !hasCanonical, '404 page must not carry a canonical');
+  else
+    check(rel, 'canonical', hasCanonical);
+
+  if (rel === '404.html') {
+    const robotsTag = metaTags.find((t) => /name\s*=\s*"robots"/i.test(t));
+    const robotsVal = robotsTag && robotsTag.match(/content\s*=\s*"([^"]*)"/i);
+    check(rel, 'noindex-on-404', !!robotsVal && /noindex/i.test(robotsVal[1]),
+      robotsVal ? robotsVal[1] : 'no robots meta');
+  }
 
   const ogImg = metaTags.find((t) => /property\s*=\s*"og:image"/i.test(t));
   const ogImgVal = ogImg && ogImg.match(/content\s*=\s*"([^"]*)"/i);
