@@ -18,6 +18,9 @@
      - every JSON-LD block parses as valid JSON (and at least one exists)
      - every <img> carries an alt attribute
      - no dead internal links (href/src resolving to a missing file)
+     - fonts are self-hosted: no fonts.googleapis.com / fonts.gstatic.com
+       references on any page; every font preload resolves locally;
+       every @font-face url() in assets/css/3d.css exists on disk
    Plus: sitemap.xml and robots.txt serve with HTTP 200.
    No dependencies — Node built-ins only. */
 import http from 'node:http';
@@ -153,7 +156,33 @@ for (const rel of pages) {
     if (target && !fs.existsSync(target)) dead.push(ref);
   }
   check(rel, 'internal-links', dead.length === 0, dead.length ? 'dead: ' + dead.join(', ') : '');
+
+  const hasThirdPartyFonts = /fonts\.googleapis\.com|fonts\.gstatic\.com/i.test(body);
+  check(rel, 'no-third-party-fonts', !hasThirdPartyFonts, hasThirdPartyFonts ? 'third-party font reference present' : '');
+
+  const linkTags = body.match(/<link\b[^>]*>/gi) || [];
+  const fontPreloads = linkTags
+    .filter((t) => /rel\s*=\s*"preload"/i.test(t) && /as\s*=\s*"font"/i.test(t))
+    .map((t) => (t.match(/href\s*=\s*"([^"]+)"/i) || [])[1])
+    .filter(Boolean);
+  const missingPreloads = fontPreloads.filter((ref) => {
+    const target = resolveInternal(rel, ref);
+    return target && !fs.existsSync(target);
+  });
+  check(rel, 'font-preloads-resolve',
+    fontPreloads.length > 0 && missingPreloads.length === 0,
+    fontPreloads.length === 0 ? 'no font preloads found'
+      : (missingPreloads.length ? 'missing: ' + missingPreloads.join(', ') : ''));
 }
+
+const cssText = fs.readFileSync(path.join(ROOT, 'assets/css/3d.css'), 'utf-8');
+const fontUrls = [...cssText.matchAll(/url\(['"]?(\.\.\/fonts\/[^'")]+)['"]?\)/g)].map((m) => m[1]);
+const missingFonts = [...new Set(fontUrls)].filter((u) =>
+  !fs.existsSync(path.resolve(ROOT, 'assets/css', u)));
+check('assets/css/3d.css', 'fontface-files-exist',
+  fontUrls.length > 0 && missingFonts.length === 0,
+  fontUrls.length === 0 ? 'no font urls in CSS'
+    : (missingFonts.length ? 'missing: ' + missingFonts.join(', ') : `${fontUrls.length} font files present`));
 
 for (const extra of ['/sitemap.xml', '/robots.txt']) {
   const { status } = await get(extra);
