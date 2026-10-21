@@ -33,6 +33,8 @@ const PAGES = [
   ['blog.html', 'weekly', '0.8'],
   ['blog/first-30-seconds.html', 'weekly', '0.8'],
   ['blog/follow-up-engine.html', 'weekly', '0.8'],
+  ['blog/website-cost-india.html', 'weekly', '0.8'],
+  ['blog/website-vs-instagram.html', 'weekly', '0.8'],
   ['cities/ajmer.html', 'weekly', '0.8'],
   ['cities/jaipur.html', 'weekly', '0.8'],
   ['cities/bikaner.html', 'weekly', '0.8'],
